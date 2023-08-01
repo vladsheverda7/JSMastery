@@ -6,5 +6,8 @@
   "scripts": {
     "test": "jest"
   },
-  "type": "module"
+  "type":"commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.36.2"
+  }
 }
