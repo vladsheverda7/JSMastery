@@ -19,7 +19,7 @@
   },
   "scripts": {
     "test": "jest",
-    "test:traffic-light": "jest test_frameworks/trafficLight.test.js"
+    "test:unit": "jest test_frameworks/trafficLight.test.js"
   },
   "dependencies": {
     "chai": "^4.3.7",

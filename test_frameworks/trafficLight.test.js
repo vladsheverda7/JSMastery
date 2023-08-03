@@ -1,7 +1,7 @@
 const expect = require("chai").expect;
 const TrafficLight = require("./trafficLight.js");
 
-describe("Scoped / Nested block", () => {
+describe("Check Traffic Light class", () => {
   let trafficLight;
   beforeEach(() => {
     trafficLight = new TrafficLight();
@@ -13,17 +13,6 @@ describe("Scoped / Nested block", () => {
 
   test("should return the correct number of colors", () => {
     expect(trafficLight.colorsAmount).to.equal(3); // bug number 1. look at readme.md
-  });
-
-  test("should correctly set the light", () => {
-    trafficLight.setLight(2);
-    expect(trafficLight.light).to.equal("red");
-
-    trafficLight.setLight(1);
-    expect(trafficLight.light).to.equal("yellow");
-
-    trafficLight.setLight(0);
-    expect(trafficLight.light).to.equal("green");
   });
 
   test("should correctly move to the next light", () => {
@@ -51,5 +40,20 @@ describe("Scoped / Nested block", () => {
     expect(trafficLight.isGreenActive()).to.be.false;
     expect(trafficLight.isYellowActive()).to.be.false;
     expect(trafficLight.isRedActive()).to.be.true;
+  });
+
+  describe.each([
+    {
+      index: 2,
+      expectedcolor: "red",
+    },
+    { index: 1, expectedcolor: "yellow" },
+    { index: 0, expectedcolor: "green" },
+    ,
+  ])("should correctly set the light", ({ index, expectedcolor }) => {
+    test(`${expectedcolor} color index is ${index}`, () => {
+      trafficLight.setLight(index);
+      expect(trafficLight.light).to.equal(expectedcolor);
+    });
   });
 });
