@@ -1,13 +1,32 @@
 {
+  "name": "playwright-taf",
+  "version": "1.0.0",
+  "license": "ISC",
+  "description": "SDET Mastery JS",
+  "author": "Vladislav Sheverda",
+  "keywords": [
+    "playwright",
+    "node",
+    "javascript",
+    "api",
+    "ui",
+    "taf"
+  ],
+  "main": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vladsheverda7/JSMastery"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest test_frameworks/trafficLight.test.js"
+  },
   "dependencies": {
     "chai": "^4.3.7",
     "jest": "^29.6.2"
   },
-  "scripts": {
-    "test": "jest"
-  },
-  "type":"commonjs",
   "devDependencies": {
     "@playwright/test": "^1.36.2"
-  }
+  },
+  "type": "commonjs"
 }
