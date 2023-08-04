@@ -1,4 +1,4 @@
-export class SideBar {
+export class SideBarComponent {
   constructor(page) {
     this.page = page;
     this.burgerMenuBtn = page.locator("#react-burger-menu-btn");

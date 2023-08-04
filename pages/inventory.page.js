@@ -1,6 +1,12 @@
-export class Inventory {
-    constructor(page){
-        this.page = page;
-        this.inventoryContent = page.locator('.inventory_container');
-    }
+const { ProductComponent } = require("../components/product.component");
+
+export class InventoryPage {
+  constructor(page) {
+    this.page = page;
+  }
+
+  async clickAddProductToCartBtn(index) {
+    let product = new ProductComponent(this.page);
+    await product.addProductToCart(index);
+  }
 }

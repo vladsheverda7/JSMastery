@@ -111,7 +111,7 @@ test.describe("Verify sorting by item price", () => {
 
 async function AddItemToCart(page, index) {
   const itemLocator = await page.locator(
-    `//div[@class="inventory_item"][${index}]`
+    `//div[@class="inventory_item"][${index}]//button`
   );
 
   await itemLocator.click();
