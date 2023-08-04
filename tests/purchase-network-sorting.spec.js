@@ -4,6 +4,7 @@ const { InventoryPage } = require("../pages/inventory.page");
 const { CartIconComponent } = require("../components/cart.component");
 const { CartPage } = require("../pages/cart.page");
 const { CheckoutPage } = require("../pages/checkout.page");
+const { FooterComponent } = require("../components/footer.component");
 
 test.describe("Test purchase", () => {
   let loginPage;
@@ -11,6 +12,7 @@ test.describe("Test purchase", () => {
   let cartIconComponent;
   let cartPage;
   let checkoutPage;
+  let footerComponent;
 
   test.beforeEach(async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
@@ -31,3 +33,44 @@ test.describe("Test purchase", () => {
     expect(await checkoutPage.getCheckoutCompleteMsg()).toBeTruthy();
   });
 });
+
+
+test.describe("Test Social Media", () => {
+    let loginPage;
+    let footerComponent;
+
+    test.beforeEach(async ({ page }) => {
+        await page.goto("https://www.saucedemo.com/");
+        loginPage = new LoginPage(page);
+        await loginPage.Login("standard_user", "secret_sauce");
+      });
+
+      test("should open twitter page", async({page, context}) =>{
+        const pagePromise = context.waitForEvent("page");
+        footerComponent = new FooterComponent(page);
+        await footerComponent.clickTwitterIcon();
+        const newPage = await pagePromise;
+        await newPage.waitForLoadState();
+        await expect(newPage).toHaveURL("https://twitter.com/saucelabs");
+      })
+
+      test("should open facebook page", async({page, context}) =>{
+        const pagePromise = context.waitForEvent("page");
+        footerComponent = new FooterComponent(page);
+        await footerComponent.clickFacebookIcon();
+        const newPage = await pagePromise;
+        await newPage.waitForLoadState();
+        await expect(newPage).toHaveURL("https://www.facebook.com/saucelabs");
+      })
+
+      test("should open linkedIn page", async({page, context}) =>{
+        const pagePromise = context.waitForEvent("page");
+        footerComponent = new FooterComponent(page);
+        await footerComponent.clickLinkedInIcon();
+        const newPage = await pagePromise;
+        await newPage.waitForLoadState();
+        await expect(newPage).toHaveURL(
+            "https://www.linkedin.com/company/sauce-labs/"
+          );
+      })
+})
