@@ -9,6 +9,11 @@ const { Constants } = require("../helpers/constants.js");
 
 import { isSortedAscending } from "../helpers/checkArrisSorted.js";
 
+const config = require('config');
+const baseUrl = config.get('baseUrl');
+const validUsername = config.get('validUsername');
+const validPassword = config.get('validPassword');
+
 test.describe("Test purchase", () => {
   let loginPage;
   let inventoryPage;
@@ -17,9 +22,9 @@ test.describe("Test purchase", () => {
   let checkoutPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(Constants.BASE_URL);
+    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
-    await loginPage.Login("standard_user", "secret_sauce");
+    await loginPage.Login(validUsername, validPassword);
   });
 
   test("should make purchase", async ({ page }) => {
@@ -30,7 +35,7 @@ test.describe("Test purchase", () => {
     cartPage = new CartPage(page);
     await cartPage.clickCheckoutBtn();
     checkoutPage = new CheckoutPage(page);
-    await checkoutPage.executeFirstChecoutStep("test", "test", "0000");
+    await checkoutPage.executeFirstCheckoutStep("test", "test", "0000");
     await checkoutPage.executeSecondChecoutStep();
     expect(await checkoutPage.getCheckoutCompleteMsg()).toBeTruthy();
   });
@@ -41,9 +46,9 @@ test.describe("Test Social Media", () => {
   let footerComponent;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(Constants.BASE_URL);
+    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
-    await loginPage.Login("standard_user", "secret_sauce");
+    await loginPage.Login(validUsername, validPassword);
   });
 
   test("should open twitter page", async ({ page, context }) => {
@@ -79,9 +84,9 @@ test.describe("Test sorting", () => {
   let inventoryPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(Constants.BASE_URL);
+    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
-    await loginPage.Login("standard_user", "secret_sauce");
+    await loginPage.Login(validUsername, validPassword);
   });
 
   test("should sort items by price from low to higt", async ({ page }) => {

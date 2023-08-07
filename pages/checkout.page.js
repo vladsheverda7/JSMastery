@@ -21,7 +21,7 @@ export class CheckoutPage {
     await this.continueBtn.click();
   }
 
-  async executeFirstChecoutStep(firstName, lastName, zipCode) {
+  async executeFirstCheckoutStep(firstName, lastName, zipCode) {
     await this.fillUserInformation(firstName, lastName, zipCode);
     await this.clickContinueBtn();
   }
