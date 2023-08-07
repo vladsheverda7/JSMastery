@@ -6,13 +6,14 @@ const { CartPage } = require("../pages/cart.page");
 const { CheckoutPage } = require("../pages/checkout.page");
 const { FooterComponent } = require("../components/footer.component");
 
+import { isSortedAscending } from "../helpers/checkArrisSorted.js";
+
 test.describe("Test purchase", () => {
   let loginPage;
   let inventoryPage;
   let cartIconComponent;
   let cartPage;
   let checkoutPage;
-  let footerComponent;
 
   test.beforeEach(async ({ page }) => {
     await page.goto("https://www.saucedemo.com/");
@@ -34,43 +35,64 @@ test.describe("Test purchase", () => {
   });
 });
 
-
 test.describe("Test Social Media", () => {
-    let loginPage;
-    let footerComponent;
+  let loginPage;
+  let footerComponent;
 
-    test.beforeEach(async ({ page }) => {
-        await page.goto("https://www.saucedemo.com/");
-        loginPage = new LoginPage(page);
-        await loginPage.Login("standard_user", "secret_sauce");
-      });
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://www.saucedemo.com/");
+    loginPage = new LoginPage(page);
+    await loginPage.Login("standard_user", "secret_sauce");
+  });
 
-      test("should open twitter page", async({page, context}) =>{
-        const pagePromise = context.waitForEvent("page");
-        footerComponent = new FooterComponent(page);
-        await footerComponent.clickTwitterIcon();
-        const newPage = await pagePromise;
-        await newPage.waitForLoadState();
-        await expect(newPage).toHaveURL("https://twitter.com/saucelabs");
-      })
+  test("should open twitter page", async ({ page, context }) => {
+    const pagePromise = context.waitForEvent("page");
+    footerComponent = new FooterComponent(page);
+    await footerComponent.clickTwitterIcon();
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState();
+    await expect(newPage).toHaveURL("https://twitter.com/saucelabs");
+  });
 
-      test("should open facebook page", async({page, context}) =>{
-        const pagePromise = context.waitForEvent("page");
-        footerComponent = new FooterComponent(page);
-        await footerComponent.clickFacebookIcon();
-        const newPage = await pagePromise;
-        await newPage.waitForLoadState();
-        await expect(newPage).toHaveURL("https://www.facebook.com/saucelabs");
-      })
+  test("should open facebook page", async ({ page, context }) => {
+    const pagePromise = context.waitForEvent("page");
+    footerComponent = new FooterComponent(page);
+    await footerComponent.clickFacebookIcon();
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState();
+    await expect(newPage).toHaveURL("https://www.facebook.com/saucelabs");
+  });
 
-      test("should open linkedIn page", async({page, context}) =>{
-        const pagePromise = context.waitForEvent("page");
-        footerComponent = new FooterComponent(page);
-        await footerComponent.clickLinkedInIcon();
-        const newPage = await pagePromise;
-        await newPage.waitForLoadState();
-        await expect(newPage).toHaveURL(
-            "https://www.linkedin.com/company/sauce-labs/"
-          );
-      })
-})
+  test("should open linkedIn page", async ({ page, context }) => {
+    const pagePromise = context.waitForEvent("page");
+    footerComponent = new FooterComponent(page);
+    await footerComponent.clickLinkedInIcon();
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState();
+    await expect(newPage).toHaveURL(
+      "https://www.linkedin.com/company/sauce-labs/"
+    );
+  });
+});
+
+test.describe("Test sorting", () => {
+  let loginPage;
+  let inventoryPage;
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto("https://www.saucedemo.com/");
+    loginPage = new LoginPage(page);
+    await loginPage.Login("standard_user", "secret_sauce");
+  });
+
+  test("should sort items by price from low to higt", async ({ page }) => {
+    inventoryPage = new InventoryPage(page);
+    await inventoryPage.setItemSorting("lohi");
+
+    expect(
+      isSortedAscending(
+        await inventoryPage.getItemListBySpecificAttribute("price")
+      )
+    ).toBeTruthy();
+  });
+});
