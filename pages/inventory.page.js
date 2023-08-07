@@ -3,6 +3,7 @@ const { ProductComponent } = require("../components/product.component");
 export class InventoryPage {
   constructor(page) {
     this.page = page;
+    this.inventoryContent = page.locator(".inventory_container");
     this.sortBtn = page.locator(
       '//select[@data-test="product_sort_container"]'
     );
@@ -19,7 +20,11 @@ export class InventoryPage {
     );
   }
 
-  async setItemSorting(sortingType){
+  async setItemSorting(sortingType) {
     await this.sortBtn.selectOption({ value: sortingType });
+  }
+
+  async getInventoryContent() {
+    return await this.inventoryContent;
   }
 }

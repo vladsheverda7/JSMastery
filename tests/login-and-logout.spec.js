@@ -1,18 +1,18 @@
 const { test, expect } = require("@playwright/test");
 const { LoginPage } = require("../pages/login.page");
-const { SideBar } = require("../components/sidebar.component");
-const { Inventory } = require("../pages/inventory.page");
+const { SideBarComponent } = require("../components/sidebar.component");
+const { InventoryPage } = require("../pages/inventory.page");
 
 const config = require('config');
 const baseUrl = config.get('baseUrl');
 const validUsername = config.get('validUsername');
 const validPassword = config.get('validPassword');
 const invalidUsername = config.get('invalidUsername');
-const invalidPassword = config.get('123456');
+const invalidPassword = config.get('invalidPassword');
 
 test.describe("Test login/logout functionality", () => {
   let loginPage;
-  let sideBar;
+  let sideBarComponent;
   let inventoryPage;
 
   test.beforeEach(async ({ page }) => {
@@ -22,17 +22,17 @@ test.describe("Test login/logout functionality", () => {
 
   test("should login with correct credentials", async ({ page }) => {
     await loginPage.Login(validUsername, validPassword);
-    inventoryPage = new Inventory(page);
+    inventoryPage = new InventoryPage(page);
 
-    await expect(inventoryPage.inventoryContent).toBeEnabled();
+    await expect(await inventoryPage.getInventoryContent()).toBeEnabled();
   });
 
   test("should logout", async ({ page }) => {
     await loginPage.Login(validUsername, validPassword);
-    sideBar = new SideBar(page);
+    sideBarComponent = new SideBarComponent(page);
 
-    await sideBar.ClickBurgerMenuBtn();
-    await sideBar.ClickLogoutBtn();
+    await sideBarComponent.ClickBurgerMenuBtn();
+    await sideBarComponent.ClickLogoutBtn();
 
     await expect(loginPage.loginContainer).toBeVisible();
   });

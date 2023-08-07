@@ -24,3 +24,26 @@ npm run test:unit
 Short description:
 Expected result:
 Actual result:
+
+## UI tests
+1. install playwright
+npm init playwright@latest
+2. install config node module to read data from config file
+npm i config
+
+## Description
+UI tests are made based on Page Object pattern
+
+## Structure
+1. components folder - is used to work with shared application components
+2. config folder - stores infromation about user
+3. helpers folder - is used for storring constants and general methods which will be used for making code reusable
+4. pages folder - is used to work with applications pages
+5. tests - os ised to store UI tests
+
+## Usage
+1. After installation, you can run all UI tests from the command line:
+npm run test:UI
+it will run only on Chrome
+2. To ge report, the following command can be run
+npm run report
