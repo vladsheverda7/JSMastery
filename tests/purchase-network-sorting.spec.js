@@ -5,6 +5,7 @@ const { CartIconComponent } = require("../components/cart.component");
 const { CartPage } = require("../pages/cart.page");
 const { CheckoutPage } = require("../pages/checkout.page");
 const { FooterComponent } = require("../components/footer.component");
+const { Constants } = require("../helpers/constants.js");
 
 import { isSortedAscending } from "../helpers/checkArrisSorted.js";
 
@@ -16,7 +17,7 @@ test.describe("Test purchase", () => {
   let checkoutPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto(Constants.BASE_URL);
     loginPage = new LoginPage(page);
     await loginPage.Login("standard_user", "secret_sauce");
   });
@@ -40,7 +41,7 @@ test.describe("Test Social Media", () => {
   let footerComponent;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto(Constants.BASE_URL);
     loginPage = new LoginPage(page);
     await loginPage.Login("standard_user", "secret_sauce");
   });
@@ -51,7 +52,7 @@ test.describe("Test Social Media", () => {
     await footerComponent.clickTwitterIcon();
     const newPage = await pagePromise;
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL("https://twitter.com/saucelabs");
+    await expect(newPage).toHaveURL(Constants.TWITTER_URL);
   });
 
   test("should open facebook page", async ({ page, context }) => {
@@ -60,7 +61,7 @@ test.describe("Test Social Media", () => {
     await footerComponent.clickFacebookIcon();
     const newPage = await pagePromise;
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL("https://www.facebook.com/saucelabs");
+    await expect(newPage).toHaveURL(Constants.FACEBOOK_URL);
   });
 
   test("should open linkedIn page", async ({ page, context }) => {
@@ -69,9 +70,7 @@ test.describe("Test Social Media", () => {
     await footerComponent.clickLinkedInIcon();
     const newPage = await pagePromise;
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(
-      "https://www.linkedin.com/company/sauce-labs/"
-    );
+    await expect(newPage).toHaveURL(Constants.LINKEDIN_URL);
   });
 });
 
@@ -80,7 +79,7 @@ test.describe("Test sorting", () => {
   let inventoryPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://www.saucedemo.com/");
+    await page.goto(Constants.BASE_URL);
     loginPage = new LoginPage(page);
     await loginPage.Login("standard_user", "secret_sauce");
   });
