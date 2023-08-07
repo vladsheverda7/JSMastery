@@ -19,7 +19,9 @@
   },
   "scripts": {
     "test": "jest",
-    "test:unit": "jest test_frameworks/trafficLight.test.js"
+    "test:unit": "jest test_frameworks/trafficLight.test.js",
+    "test:UI": "npx playwright test purchase-network-sorting.spec.js --project=chromium",
+    "report": "npx playwright show-report"
   },
   "dependencies": {
     "chai": "^4.3.7",
