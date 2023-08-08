@@ -7,6 +7,9 @@ export class InventoryPage {
     this.sortBtn = page.locator(
       '//select[@data-test="product_sort_container"]'
     );
+
+    this.inventoryItemLocator = (itemAttribute) =>
+      this.page.$$(`//div[@class="inventory_item_${itemAttribute}"]`);
   }
 
   async clickAddProductToCartBtn(index) {
@@ -15,9 +18,7 @@ export class InventoryPage {
   }
 
   async getItemListBySpecificAttribute(itemAttribute) {
-    return await await this.page.$$(
-      `//div[@class="inventory_item_${itemAttribute}"]`
-    );
+    return await this.inventoryItemLocator(itemAttribute);
   }
 
   async setItemSorting(sortingType) {
