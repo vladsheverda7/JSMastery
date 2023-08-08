@@ -21,14 +21,14 @@ test.describe("Test login/logout functionality", () => {
   });
 
   test("should login with correct credentials", async ({ page }) => {
-    await loginPage.Login(validUsername, validPassword);
+    await loginPage.login(validUsername, validPassword);
     inventoryPage = new InventoryPage(page);
 
     await expect(await inventoryPage.getInventoryContent()).toBeEnabled();
   });
 
   test("should logout", async ({ page }) => {
-    await loginPage.Login(validUsername, validPassword);
+    await loginPage.login(validUsername, validPassword);
     sideBarComponent = new SideBarComponent(page);
 
     await sideBarComponent.ClickBurgerMenuBtn();
@@ -38,7 +38,7 @@ test.describe("Test login/logout functionality", () => {
   });
 
   test("should not login with incorrect credentials", async () => {
-    loginPage.Login(invalidUsername, invalidPassword);
+    loginPage.login(invalidUsername, invalidPassword);
 
     await expect(loginPage.errorMessage).toBeVisible();
   });

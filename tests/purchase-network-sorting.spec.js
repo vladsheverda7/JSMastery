@@ -24,7 +24,7 @@ test.describe("Test purchase", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseUrl);
     loginPage = new LoginPage(page);
-    await loginPage.Login(validUsername, validPassword);
+    await loginPage.login(validUsername, validPassword);
   });
 
   test("should make purchase", async ({ page }) => {
@@ -48,7 +48,7 @@ test.describe("Test Social Media", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseUrl);
     loginPage = new LoginPage(page);
-    await loginPage.Login(validUsername, validPassword);
+    await loginPage.login(validUsername, validPassword);
   });
 
   test("should open twitter page", async ({ page, context }) => {
@@ -86,7 +86,7 @@ test.describe("Test sorting", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(baseUrl);
     loginPage = new LoginPage(page);
-    await loginPage.Login(validUsername, validPassword);
+    await loginPage.login(validUsername, validPassword);
   });
 
   test("should sort items by price from low to higt", async ({ page }) => {

@@ -10,7 +10,7 @@ export class LoginPage {
     this.loginContainer = page.locator('.login_wrapper-inner');
   }
 
-  async Login(user, password) {
+  async login(user, password) {
     await this.userName.fill(user);
     await this.password.fill(password);
     await this.loginButton.click();
