@@ -36,8 +36,8 @@ test.describe("Test purchase", () => {
     await cartPage.clickCheckoutBtn();
     checkoutPage = new CheckoutPage(page);
     await checkoutPage.executeFirstCheckoutStep("test", "test", "0000");
-    await checkoutPage.executeSecondChecoutStep();
-    expect(await checkoutPage.getCheckoutCompleteMsg()).toBeTruthy();
+    await checkoutPage.executeSecondCheckoutStep();
+    expect(await checkoutPage.checkCheckoutCompleteMsgIsVisible()).toBeTruthy();
   });
 });
 

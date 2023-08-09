@@ -1,20 +1,25 @@
 export class FooterComponent {
-    constructor(page){
-        this.page = page;
-        this.twitterIcon = page.locator('//li[@class="social_twitter"]');
-        this.facebookIcon = page.locator('//li[@class="social_facebook"]');
-        this.linkedInIcon = page.locator('//li[@class="social_linkedin"]');
-    }
+  #page;
+  #twitterIcon;
+  #facebookIcon;
+  #linkedInIcon;
 
-    async clickTwitterIcon(){
-        await this.twitterIcon.click();
-    }
+  constructor(page) {
+    this.#page = page;
+    this.#twitterIcon = this.#page.locator('//li[@class="social_twitter"]');
+    this.#facebookIcon = this.#page.locator('//li[@class="social_facebook"]');
+    this.#linkedInIcon = this.#page.locator('//li[@class="social_linkedin"]');
+  }
 
-    async clickFacebookIcon(){
-        await this.facebookIcon.click();
-    }
+  async clickTwitterIcon() {
+    await this.#twitterIcon.click();
+  }
 
-    async clickLinkedInIcon(){
-        await this.linkedInIcon.click();
-    }
+  async clickFacebookIcon() {
+    await this.#facebookIcon.click();
+  }
+
+  async clickLinkedInIcon() {
+    await this.#linkedInIcon.click();
+  }
 }

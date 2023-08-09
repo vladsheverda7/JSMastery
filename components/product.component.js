@@ -1,16 +1,16 @@
 export class ProductComponent {
+  #page;
+  #product;
   constructor(page) {
-    this.page = page;
+    this.#page = page;
+    this.#product = (itemIndex) =>
+      this.#page.locator(
+        `//div[@class="inventory_item"][${itemIndex}]//button`
+      );
   }
 
-  async getProduct(index) {
-    return await this.page.locator(
-        `//div[@class="inventory_item"][${index}]//button`
-    );
-  }
-
-  async addProductToCart(index) {
-    const product = await this.getProduct(index);
-    await product.click();
+  async addProductToCart(itemIndex) {
+    const productButton = this.#product(itemIndex);
+    await productButton.click();
   }
 }

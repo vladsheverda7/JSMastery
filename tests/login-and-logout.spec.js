@@ -3,12 +3,12 @@ const { LoginPage } = require("../pages/login.page");
 const { SideBarComponent } = require("../components/sidebar.component");
 const { InventoryPage } = require("../pages/inventory.page");
 
-const config = require('config');
-const baseUrl = config.get('baseUrl');
-const validUsername = config.get('validUsername');
-const validPassword = config.get('validPassword');
-const invalidUsername = config.get('invalidUsername');
-const invalidPassword = config.get('invalidPassword');
+const config = require("config");
+const baseUrl = config.get("baseUrl");
+const validUsername = config.get("validUsername");
+const validPassword = config.get("validPassword");
+const invalidUsername = config.get("invalidUsername");
+const invalidPassword = config.get("invalidPassword");
 
 test.describe("Test login/logout functionality", () => {
   let loginPage;
@@ -34,12 +34,12 @@ test.describe("Test login/logout functionality", () => {
     await sideBarComponent.ClickBurgerMenuBtn();
     await sideBarComponent.ClickLogoutBtn();
 
-    await expect(loginPage.loginContainer).toBeVisible();
+    expect(await loginPage.checkLoginFormIsVisible()).toBeTruthy();
   });
 
   test("should not login with incorrect credentials", async () => {
-    loginPage.login(invalidUsername, invalidPassword);
+    await loginPage.login(invalidUsername, invalidPassword);
 
-    await expect(loginPage.errorMessage).toBeVisible();
+    expect(await loginPage.checkErrorMessageIsVisible()).toBeTruthy();
   });
 });
