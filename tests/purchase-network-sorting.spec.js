@@ -111,7 +111,7 @@ test.describe("Test sorting", () => {
   test("should sort items by price from low to high", async ({ page }) => {
     const inventoryPage = new InventoryPage(page);
 
-    await inventoryPage.setItemSorting("lohi");
+    await inventoryPage.sortButton.selectOption({ value: "lohi" });
 
     expect(
       isArraySortedAscending(
