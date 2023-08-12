@@ -5,39 +5,45 @@ const { CartIconComponent } = require("../components/cart.component");
 const { CartPage } = require("../pages/cart.page");
 const { CheckoutPage } = require("../pages/checkout.page");
 const { FooterComponent } = require("../components/footer.component");
-const { Constants } = require("../helpers/constants.js");
 
-import { isSortedAscending } from "../helpers/checkArrisSorted.js";
+import {
+  twitterUrl,
+  facebookUrl,
+  linkedInUrl,
+} from "../constants/socialMedia.constants.js";
 
-const config = require('config');
-const baseUrl = config.get('baseUrl');
-const validUsername = config.get('validUsername');
-const validPassword = config.get('validPassword');
+import { baseUrl } from "../constants/urls.constants.js";
+
+import {
+  validUsername,
+  validPassword,
+} from "../constants/credentials.constants.js";
+
+import { isArraySortedAscending } from "../helpers/arrayHelpers.js";
 
 test.describe("Test purchase", () => {
   let loginPage;
-  let inventoryPage;
-  let cartIconComponent;
-  let cartPage;
-  let checkoutPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
+
+    await page.goto(baseUrl);
     await loginPage.login(validUsername, validPassword);
   });
 
   test("should make purchase", async ({ page }) => {
-    inventoryPage = new InventoryPage(page);
+    const inventoryPage = new InventoryPage(page);
+    const cartIconComponent = new CartIconComponent(page);
+    const cartPage = new CartPage(page);
+    const checkoutPage = new CheckoutPage(page);
+
     await inventoryPage.clickAddProductToCartBtn(1);
-    cartIconComponent = new CartIconComponent(page);
-    await cartIconComponent.clickCartIcon();
-    cartPage = new CartPage(page);
-    await cartPage.clickCheckoutBtn();
-    checkoutPage = new CheckoutPage(page);
+    await cartIconComponent.cartIconLink.click();
+    await cartPage.checkoutButton.click();
     await checkoutPage.executeFirstCheckoutStep("test", "test", "0000");
-    await checkoutPage.executeSecondCheckoutStep();
-    expect(await checkoutPage.checkCheckoutCompleteMsgIsVisible()).toBeTruthy();
+    await checkoutPage.finishButton.click();
+
+    await expect(checkoutPage.checkoutCompleteHeader).toBeVisible();
   });
 });
 
@@ -46,55 +52,69 @@ test.describe("Test Social Media", () => {
   let footerComponent;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
+
+    await page.goto(baseUrl);
     await loginPage.login(validUsername, validPassword);
   });
 
   test("should open twitter page", async ({ page, context }) => {
     const pagePromise = context.waitForEvent("page");
     footerComponent = new FooterComponent(page);
-    await footerComponent.clickTwitterIcon();
+
+    await footerComponent.twitterIconListItem.click();
+
     const newPage = await pagePromise;
+
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(Constants.TWITTER_URL);
+
+    await expect(newPage).toHaveURL(twitterUrl);
   });
 
   test("should open facebook page", async ({ page, context }) => {
     const pagePromise = context.waitForEvent("page");
     footerComponent = new FooterComponent(page);
-    await footerComponent.clickFacebookIcon();
+
+    await footerComponent.facebookIconListItem.click();
+
     const newPage = await pagePromise;
+
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(Constants.FACEBOOK_URL);
+
+    await expect(newPage).toHaveURL(facebookUrl);
   });
 
   test("should open linkedIn page", async ({ page, context }) => {
     const pagePromise = context.waitForEvent("page");
     footerComponent = new FooterComponent(page);
-    await footerComponent.clickLinkedInIcon();
+
+    await footerComponent.linkedInIconListItem.click();
+
     const newPage = await pagePromise;
+
     await newPage.waitForLoadState();
-    await expect(newPage).toHaveURL(Constants.LINKEDIN_URL);
+
+    await expect(newPage).toHaveURL(linkedInUrl);
   });
 });
 
 test.describe("Test sorting", () => {
   let loginPage;
-  let inventoryPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
+
+    await page.goto(baseUrl);
     await loginPage.login(validUsername, validPassword);
   });
 
-  test("should sort items by price from low to higt", async ({ page }) => {
-    inventoryPage = new InventoryPage(page);
+  test("should sort items by price from low to high", async ({ page }) => {
+    const inventoryPage = new InventoryPage(page);
+
     await inventoryPage.setItemSorting("lohi");
 
     expect(
-      isSortedAscending(
+      isArraySortedAscending(
         await inventoryPage.getItemListBySpecificAttribute("price")
       )
     ).toBeTruthy();

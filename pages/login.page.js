@@ -1,29 +1,23 @@
 export class LoginPage {
   #page;
-  #userName;
-  #password;
+  #userNameInputField;
+  #passwordInputField;
   #loginButton;
-  #errorMessage;
-  #loginContainer;
+  loginFormContainer;
+  loginErrorMessage;
+
   constructor(page) {
     this.#page = page;
-    this.#userName = this.#page.locator('//input[@id="user-name"]');
-    this.#password = this.#page.locator('//input[@id="password"]');
+    this.#userNameInputField = this.#page.locator('//input[@id="user-name"]');
+    this.#passwordInputField = this.#page.locator('//input[@id="password"]');
     this.#loginButton = this.#page.locator('//input[@id="login-button"]');
-    this.#errorMessage = this.#page.locator("//h3[@data-test='error']");
-    this.#loginContainer = this.#page.locator(".login_wrapper-inner");
+    this.loginFormContainer = this.#page.locator(".login_wrapper-inner");
+    this.loginErrorMessage = this.#page.locator("//h3[@data-test='error']");
   }
 
-  async login(user, password) {
-    await this.#userName.fill(user);
-    await this.#password.fill(password);
+  async login(userName, password) {
+    await this.#userNameInputField.fill(userName);
+    await this.#passwordInputField.fill(password);
     await this.#loginButton.click();
-  }
-
-  async checkLoginFormIsVisible() {
-    return await this.#loginContainer.isVisible();
-  }
-  async checkErrorMessageIsVisible() {
-    return await this.#errorMessage.isVisible();
   }
 }

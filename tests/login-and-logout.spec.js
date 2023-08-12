@@ -3,43 +3,45 @@ const { LoginPage } = require("../pages/login.page");
 const { SideBarComponent } = require("../components/sidebar.component");
 const { InventoryPage } = require("../pages/inventory.page");
 
-const config = require("config");
-const baseUrl = config.get("baseUrl");
-const validUsername = config.get("validUsername");
-const validPassword = config.get("validPassword");
-const invalidUsername = config.get("invalidUsername");
-const invalidPassword = config.get("invalidPassword");
+import { baseUrl } from "../constants/urls.constants.js";
+
+import {
+  validUsername,
+  validPassword,
+  invalidUsername,
+  invalidPassword,
+} from "../constants/credentials.constants.js";
 
 test.describe("Test login/logout functionality", () => {
   let loginPage;
-  let sideBarComponent;
-  let inventoryPage;
 
   test.beforeEach(async ({ page }) => {
-    await page.goto(baseUrl);
     loginPage = new LoginPage(page);
+
+    await page.goto(baseUrl);
   });
 
   test("should login with correct credentials", async ({ page }) => {
+    const inventoryPage = new InventoryPage(page);
+
     await loginPage.login(validUsername, validPassword);
-    inventoryPage = new InventoryPage(page);
 
     await expect(await inventoryPage.getInventoryContent()).toBeEnabled();
   });
 
   test("should logout", async ({ page }) => {
+    const sideBarComponent = new SideBarComponent(page);
+
     await loginPage.login(validUsername, validPassword);
-    sideBarComponent = new SideBarComponent(page);
+    await sideBarComponent.burgerMenuButton.click();
+    await sideBarComponent.logoutButton.click();
 
-    await sideBarComponent.ClickBurgerMenuBtn();
-    await sideBarComponent.ClickLogoutBtn();
-
-    expect(await loginPage.checkLoginFormIsVisible()).toBeTruthy();
+    await expect(loginPage.loginFormContainer).toBeVisible();
   });
 
   test("should not login with incorrect credentials", async () => {
     await loginPage.login(invalidUsername, invalidPassword);
 
-    expect(await loginPage.checkErrorMessageIsVisible()).toBeTruthy();
+    await expect(loginPage.loginErrorMessage).toBeVisible();
   });
 });

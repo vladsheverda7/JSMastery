@@ -1,12 +1,9 @@
 export class CartIconComponent {
   #page;
-  #cartIcon;
+  cartIconLink;
+  
   constructor(page) {
     this.#page = page;
-    this.#cartIcon = this.#page.locator('//a[@class="shopping_cart_link"]');
-  }
-
-  async clickCartIcon() {
-    await this.#cartIcon.click();
+    this.cartIconLink = this.#page.locator('//a[@class="shopping_cart_link"]');
   }
 }

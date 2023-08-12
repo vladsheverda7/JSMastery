@@ -1,6 +1,7 @@
 export class ProductComponent {
   #page;
   #product;
+  
   constructor(page) {
     this.#page = page;
     this.#product = (itemIndex) =>
@@ -11,6 +12,7 @@ export class ProductComponent {
 
   async addProductToCart(itemIndex) {
     const productButton = this.#product(itemIndex);
+    
     await productButton.click();
   }
 }
