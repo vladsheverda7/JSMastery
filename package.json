@@ -20,8 +20,8 @@
   "scripts": {
     "test": "jest",
     "test:unit": "jest test_frameworks/trafficLight.test.js",
-    "test:UILogin": "npx playwright test login-and-logout.spec.js --project=chromium", 
-    "test:UI": "npx playwright test --project=chromium",
+    "test:login": "npx playwright test tests/login.tests/.*.spec.js --project=chromium", 
+    "test:e2e": "npx playwright test --project=chromium",
     "report": "npx playwright show-report"
   },
   "dependencies": {

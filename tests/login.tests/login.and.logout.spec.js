@@ -1,16 +1,16 @@
 const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../pages/login.page");
-const { SideBarComponent } = require("../components/sidebar.component");
-const { InventoryPage } = require("../pages/inventory.page");
+const { LoginPage } = require("../../pages/login.page.js");
+const { SideBarComponent } = require("../../components/sidebar.component.js");
+const { InventoryPage } = require("../../pages/inventory.page.js");
 
-import { baseUrl } from "../constants/urls.constants.js";
+import { baseUrl } from "../../constants/urls.constants.js";
 
 import {
   validUsername,
   validPassword,
   invalidUsername,
   invalidPassword,
-} from "../constants/credentials.constants.js";
+} from "../../constants/credentials.constants.js";
 
 test.describe("Test login/logout functionality", () => {
   let loginPage;

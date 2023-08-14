@@ -1,25 +1,26 @@
 const { test, expect } = require("@playwright/test");
-const { LoginPage } = require("../pages/login.page");
-const { InventoryPage } = require("../pages/inventory.page");
-const { CartIconComponent } = require("../components/cart.component");
-const { CartPage } = require("../pages/cart.page");
-const { CheckoutPage } = require("../pages/checkout.page");
-const { FooterComponent } = require("../components/footer.component");
+const { LoginPage } = require("../../pages/login.page.js");
+const { InventoryPage } = require("../../pages/inventory.page.js");
+const { CartIconComponent } = require("../../components/cart.component.js");
+const { CartPage } = require("../../pages/cart.page.js");
+const { CheckoutPage } = require("../../pages/checkout.page.js");
+const { FooterComponent } = require("../../components/footer.component.js");
+const {ProductComponent} = require("../../components/product.component.js");
 
 import {
   twitterUrl,
   facebookUrl,
   linkedInUrl,
-} from "../constants/socialMedia.constants.js";
+} from "../../constants/socialMedia.constants.js";
 
-import { baseUrl } from "../constants/urls.constants.js";
+import { baseUrl } from "../../constants/urls.constants.js";
 
 import {
   validUsername,
   validPassword,
-} from "../constants/credentials.constants.js";
+} from "../../constants/credentials.constants.js";
 
-import { isArraySortedAscending } from "../helpers/arrayHelpers.js";
+import { isArraySortedAscending } from "../../helpers/arrayHelpers.js";
 
 test.describe("Test purchase", () => {
   let loginPage;
@@ -32,12 +33,12 @@ test.describe("Test purchase", () => {
   });
 
   test("should make purchase", async ({ page }) => {
-    const inventoryPage = new InventoryPage(page);
     const cartIconComponent = new CartIconComponent(page);
     const cartPage = new CartPage(page);
     const checkoutPage = new CheckoutPage(page);
+    const productComponent = new ProductComponent(page);
 
-    await inventoryPage.clickAddProductToCartBtn(1);
+    await productComponent.addProductToCart(1);
     await cartIconComponent.cartIconLink.click();
     await cartPage.checkoutButton.click();
     await checkoutPage.executeFirstCheckoutStep("test", "test", "0000");

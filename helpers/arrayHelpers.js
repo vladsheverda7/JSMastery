@@ -1,8 +1,11 @@
-export function isArraySortedAscending(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    if (arr[i] > arr[i + 1]) {
-      return false;
+export function isArraySortedAscending(array) {
+  return array.every((currentValue, index, arr) => {
+    if (index === 0) {
+      return true;
     }
-  }
-  return true;
+    
+    const previousValue = arr[index - 1];
+    
+    return currentValue >= previousValue;
+  });
 }

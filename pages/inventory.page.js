@@ -1,10 +1,8 @@
-const { ProductComponent } = require("../components/product.component");
-
 export class InventoryPage {
   #page;
   #inventoryContent;
   sortButton;
-  #inventoryItemLocator;
+  #inventoryItemBlock;
 
   constructor(page) {
     this.#page = page;
@@ -12,21 +10,17 @@ export class InventoryPage {
     this.sortButton = this.#page.locator(
       '//select[@data-test="product_sort_container"]'
     );
-    this.#inventoryItemLocator = (itemAttribute) =>
-      this.#page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all();
-  }
-
-  async clickAddProductToCartBtn(index) {
-    let product = new ProductComponent(this.#page);
-    
-    await product.addProductToCart(index);
+    this.#inventoryItemBlock = (itemAttribute) =>
+      this.#page
+        .locator(`//div[@class="inventory_item_${itemAttribute}"]`)
+        .all();
   }
 
   async getItemListBySpecificAttribute(itemAttribute) {
-    return await this.#inventoryItemLocator(itemAttribute);
+    return this.#inventoryItemBlock(itemAttribute);
   }
 
   async getInventoryContent() {
-    return await this.#inventoryContent;
+    return this.#inventoryContent;
   }
 }
