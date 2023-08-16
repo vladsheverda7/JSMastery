@@ -24,12 +24,10 @@
     "test:e2e": "npx playwright test --project=chromium",
     "report": "npx playwright show-report"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@playwright/test": "^1.36.2",
     "chai": "^4.3.7",
     "jest": "^29.6.2"
-  },
-  "devDependencies": {
-    "@playwright/test": "^1.36.2"
   },
   "type": "commonjs"
 }
