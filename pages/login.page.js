@@ -1,23 +1,36 @@
-export class LoginPage {
-  #page;
-  #userNameInputField;
-  #passwordInputField;
-  #loginButton;
-  loginFormContainer;
-  loginErrorMessage;
+import { BasePage } from './base.page.js';
 
-  constructor(page) {
-    this.#page = page;
-    this.#userNameInputField = this.#page.locator('//input[@id="user-name"]');
-    this.#passwordInputField = this.#page.locator('//input[@id="password"]');
-    this.#loginButton = this.#page.locator('//input[@id="login-button"]');
-    this.loginFormContainer = this.#page.locator(".login_wrapper-inner");
-    this.loginErrorMessage = this.#page.locator("//h3[@data-test='error']");
-  }
+import { BaseElement } from '../elements/baseElement.js';
 
-  async login(userName, password) {
-    await this.#userNameInputField.fill(userName);
-    await this.#passwordInputField.fill(password);
-    await this.#loginButton.click();
-  }
+export class LoginPage extends BasePage {
+    loginFormContainer;
+    loginErrorMessage;
+
+    constructor(page) {
+        super(page);
+        // this.loginFormContainer = this.#page.locator(".login_wrapper-inner");
+        // this.loginErrorMessage = this.#page.locator("//h3[@data-test='error']");
+    }
+
+    get getLoginInput() {
+        return new BaseElement(this.page.locator('//input[@id="user-name"]'));
+    }
+
+    get getPasswordInput() {
+        return new BaseElement(this.page.locator('//input[@id="password"]'));
+    }
+
+    get getLoginButton() {
+        return new BaseElement(this.page.locator('//input[@id="login-button"]'));
+    }
+
+    async login(userName, password) {
+        const userNameInput = this.getLoginInput;
+        const passwordInput = this.getPasswordInput;
+        const loginButton = this.getLoginButton;
+
+        await userNameInput.fill(userName);
+        await passwordInput.fill(password);
+        await loginButton.click();
+    }
 }

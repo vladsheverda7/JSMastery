@@ -1,3 +1,14 @@
-export const twitterUrl = "https://twitter.com/saucelabs";
-export const facebookUrl = "https://www.facebook.com/saucelabs";
-export const linkedInUrl = "https://www.linkedin.com/company/sauce-labs/";
+export const socialMediaArray = [
+    {
+        url: 'https://twitter.com/saucelabs',
+        name: 'twitter',
+    },
+    {
+        url: 'https://www.facebook.com/saucelabs',
+        name: 'facebook',
+    },
+    {
+        url: 'https://www.linkedin.com/company/sauce-labs/',
+        name: 'linkedin',
+    },
+];

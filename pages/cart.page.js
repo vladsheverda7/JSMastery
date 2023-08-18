@@ -1,9 +1,9 @@
 export class CartPage {
-  #page;
-  checkoutButton;
+    #page;
+    checkoutButton;
 
-  constructor(page) {
-    this.#page = page;
-    this.checkoutButton = this.#page.locator('//button[@id="checkout"]');
-  }
+    constructor(page) {
+        this.#page = page;
+        this.checkoutButton = this.#page.locator('//button[@id="checkout"]');
+    }
 }
