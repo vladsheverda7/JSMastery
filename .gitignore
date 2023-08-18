@@ -1,2 +1,7 @@
 # Node.js Tools for Visual Studio
 node_modules/
+
+# Playwright reports and results
+html-report/
+test-results/
+playwright-report/
