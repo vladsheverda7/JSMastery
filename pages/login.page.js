@@ -1,15 +1,9 @@
 import { BasePage } from './base.page.js';
-
 import { BaseElement } from '../elements/baseElement.js';
 
 export class LoginPage extends BasePage {
-    loginFormContainer;
-    loginErrorMessage;
-
     constructor(page) {
         super(page);
-        // this.loginFormContainer = this.#page.locator(".login_wrapper-inner");
-        // this.loginErrorMessage = this.#page.locator("//h3[@data-test='error']");
     }
 
     get getLoginInput() {
@@ -24,13 +18,25 @@ export class LoginPage extends BasePage {
         return new BaseElement(this.page.locator('//input[@id="login-button"]'));
     }
 
-    async login(userName, password) {
-        const userNameInput = this.getLoginInput;
-        const passwordInput = this.getPasswordInput;
-        const loginButton = this.getLoginButton;
+    get getLoginFormContainer() {
+        return new BaseElement(this.page.locator('.login_wrapper-inner'));
+    }
 
-        await userNameInput.fill(userName);
-        await passwordInput.fill(password);
-        await loginButton.click();
+    get getLoginErrorMessage() {
+        return new BaseElement(this.page.locator("//h3[@data-test='error']"));
+    }
+
+    async login(userName, password) {
+        await this.getLoginInput.fill(userName);
+        await this.getPasswordInput.fill(password);
+        await this.getLoginButton.click();
+    }
+
+    async checkLoginFormContainerIsVisible() {
+        await this.getLoginFormContainer.checkIsVisible();
+    }
+
+    async checkLoginErrorMessageIsVisible() {
+        await this.getLoginErrorMessage.checkIsVisible();
     }
 }

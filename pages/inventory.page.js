@@ -1,21 +1,37 @@
-export class InventoryPage {
-    #page;
-    #inventoryContent;
-    sortButton;
+import { BasePage } from './base.page';
+
+import { BaseElement } from '../elements/baseElement.js';
+
+export class InventoryPage extends BasePage {
     #inventoryItemBlock;
 
     constructor(page) {
-        this.#page = page;
-        this.#inventoryContent = this.#page.locator('.inventory_container');
-        this.sortButton = this.#page.locator('//select[@data-test="product_sort_container"]');
-        this.#inventoryItemBlock = itemAttribute => this.#page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all();
+        super(page);
+        // this.#inventoryItemBlock = itemAttribute => this.#page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all();
     }
 
-    async getItemListBySpecificAttribute(itemAttribute) {
-        return this.#inventoryItemBlock(itemAttribute);
+    get getInventoryContent() {
+        return new BaseElement(this.page.locator('.inventory_container'));
     }
 
-    async getInventoryContent() {
-        return this.#inventoryContent;
+    get getSortButton() {
+        return new BaseElement(this.page.locator('//select[@data-test="product_sort_container"]'));
     }
+
+    getItemListBySpecificAttribute(itemAttribute) {
+        return new BaseElement(this.page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all());
+    }
+
+    async checkInventoryContentIsEnabled() {
+        await this.getInventoryContent.checkIsEnabled();
+    }
+
+    async sortItemsBy(option) {
+        await this.getSortButton.selectOption(option);
+    }
+
+    // async isItemsSortedBy(attribute){
+    //     const itemList = this.getItemListBySpecificAttribute(attribute);
+    //     const isSorted
+    // }
 }

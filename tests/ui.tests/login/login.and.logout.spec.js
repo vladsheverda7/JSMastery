@@ -20,7 +20,7 @@ test.describe('login/logout functionality', () => {
 
         await loginPage.login(validUsername, validPassword);
 
-        await expect(await inventoryPage.getInventoryContent()).toBeEnabled();
+        expect(inventoryPage.checkInventoryContentIsEnabled).toBeTruthy();
     });
 
     test('should logout', async ({ page }) => {
@@ -30,12 +30,12 @@ test.describe('login/logout functionality', () => {
         await sideBarComponent.burgerMenuButton.click();
         await sideBarComponent.logoutButton.click();
 
-        // await expect(loginPage.getLoginFormContainer).toBeVisible();
+        expect(loginPage.checkLoginFormContainerIsVisible()).toBeTruthy();
     });
 
     test('should not login with incorrect credentials', async () => {
         await loginPage.login(invalidUsername, invalidPassword);
 
-        // await expect(loginPage.getLoginPageErrorMessage).toBeVisible();
+        expect(loginPage.checkLoginErrorMessageIsVisible()).toBeTruthy();
     });
 });
