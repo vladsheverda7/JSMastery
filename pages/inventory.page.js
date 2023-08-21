@@ -1,13 +1,10 @@
 import { BasePage } from './base.page';
-
 import { BaseElement } from '../elements/baseElement.js';
+import { isArraySortedAscending } from '../helpers/array.helpers.js';
 
 export class InventoryPage extends BasePage {
-    #inventoryItemBlock;
-
     constructor(page) {
         super(page);
-        // this.#inventoryItemBlock = itemAttribute => this.#page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all();
     }
 
     get getInventoryContent() {
@@ -30,8 +27,11 @@ export class InventoryPage extends BasePage {
         await this.getSortButton.selectOption(option);
     }
 
-    // async isItemsSortedBy(attribute){
-    //     const itemList = this.getItemListBySpecificAttribute(attribute);
-    //     const isSorted
-    // }
+    async isItemsSortedBy(attribute) {
+        const items = this.getItemListBySpecificAttribute(attribute);
+        const itemsArray = Object.values(items);
+        const isSorted = isArraySortedAscending(itemsArray);
+
+        return isSorted;
+    }
 }

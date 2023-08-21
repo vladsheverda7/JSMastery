@@ -9,10 +9,6 @@ export class BaseElement {
         return this.locator;
     }
 
-    async getAllElements() {
-        return await this.getLocator().all();
-    }
-
     async click() {
         await this.getLocator().click();
     }
