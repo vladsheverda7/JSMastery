@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 import { LoginPage } from '../../../pages/login.page.js';
-import { InventoryPage } from '../../../pages/inventory.page.js';
 import { MainPage } from '../../../pages/main.page.js';
+import { InventoryPage } from '../../../pages/inventory.page.js';
 import { baseUrl } from '../../../constants/urls.constants.js';
 import { validUsername, validPassword, invalidUsername, invalidPassword } from '../../../constants/credentials.constants.js';
 

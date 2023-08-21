@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
 
 import { LoginPage } from '../../pages/login.page.js';
+import { MainPage } from '../../pages/main.page.js';
 import { baseUrl } from '../../constants/urls.constants.js';
 import { socialMediaArray } from '../../constants/socialMedia.constants.js';
 import { validUsername, validPassword } from '../../constants/credentials.constants.js';
-import { MainPage } from '../../pages/main.page.js';
 
 for (const socialMedia of socialMediaArray) {
     test(`should open ${socialMedia.name} ${socialMedia.url}`, async ({ page, context }) => {
