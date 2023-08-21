@@ -1,5 +1,6 @@
 import { BasePage } from './base.page';
 import { BaseElement } from '../elements/baseElement.js';
+import { ProductComponent } from '../components/product.component.js';
 import { isArraySortedAscending } from '../helpers/array.helpers.js';
 
 export class InventoryPage extends BasePage {
@@ -19,12 +20,8 @@ export class InventoryPage extends BasePage {
         return new BaseElement(this.page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all());
     }
 
-    async checkInventoryContentIsEnabled() {
-        await this.getInventoryContent.checkIsEnabled();
-    }
-
-    async sortItemsBy(option) {
-        await this.getSortButton.selectOption(option);
+    getProductContainer(productIndex) {
+        return new ProductComponent(this.page.locator(`//div[@class="inventory_item"][${productIndex}]`));
     }
 
     async isItemsSortedBy(attribute) {

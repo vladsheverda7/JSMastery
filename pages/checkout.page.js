@@ -1,30 +1,43 @@
-export class CheckoutPage {
-    #page;
-    #firstNameInputField;
-    #lastNameInputField;
-    #zipCodeInputField;
-    checkoutCompleteHeader;
-    continueButton;
-    finishButton;
+import { BaseElement } from '../elements/baseElement';
+import { BasePage } from './base.page';
 
+export class CheckoutPage extends BasePage {
     constructor(page) {
-        this.#page = page;
-        this.#firstNameInputField = this.#page.locator('//input[@id="first-name"]');
-        this.#lastNameInputField = this.#page.locator('//input[@id="last-name"]');
-        this.#zipCodeInputField = this.#page.locator('//input[@id="postal-code"]');
-        this.continueButton = this.#page.locator('//input[@type="submit"]');
-        this.finishButton = this.#page.locator('//button[@id="finish"]');
-        this.checkoutCompleteHeader = this.#page.locator('//h2[@class="complete-header"]');
+        super(page);
+    }
+
+    get getFirstNameInputField() {
+        return new BaseElement(this.page.locator('//input[@id="first-name"]'));
+    }
+
+    get getLastNameInputField() {
+        return new BaseElement(this.page.locator('//input[@id="last-name"]'));
+    }
+
+    get getZipCodeInputField() {
+        return new BaseElement(this.page.locator('//input[@id="postal-code"]'));
+    }
+
+    get getContinueButton() {
+        return new BaseElement(this.page.locator('//input[@type="submit"]'));
+    }
+
+    get getFinishButton() {
+        return new BaseElement(this.page.locator('//button[@id="finish"]'));
+    }
+
+    get getCheckoutCompleteHeader() {
+        return new BaseElement(this.page.locator('//h2[@class="complete-header"]'));
     }
 
     async #fillUserInformation(firstName, lastName, zipCode) {
-        await this.#firstNameInputField.fill(firstName);
-        await this.#lastNameInputField.fill(lastName);
-        await this.#zipCodeInputField.fill(zipCode);
+        await this.getFirstNameInputField.fill(firstName);
+        await this.getLastNameInputField.fill(lastName);
+        await this.getZipCodeInputField.fill(zipCode);
     }
 
     async executeFirstCheckoutStep(firstName, lastName, zipCode) {
         await this.#fillUserInformation(firstName, lastName, zipCode);
-        await this.continueButton.click();
+        await this.getContinueButton.click();
     }
 }

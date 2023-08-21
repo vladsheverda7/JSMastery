@@ -11,7 +11,7 @@ test('should sort items by price from low to high', async ({ page }) => {
 
     await page.goto(baseUrl);
     await loginPage.login(validUsername, validPassword);
-    await inventoryPage.sortItemsBy('lohi');
+    await inventoryPage.getSortButton.selectOption('lohi');
 
     const isArraySorter = inventoryPage.isItemsSortedBy('price');
 

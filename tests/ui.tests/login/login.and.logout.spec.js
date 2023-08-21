@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
 import { LoginPage } from '../../../pages/login.page.js';
-import { SideBarComponent } from '../../../components/sidebar.component.js';
 import { InventoryPage } from '../../../pages/inventory.page.js';
+import { MainPage } from '../../../pages/main.page.js';
 import { baseUrl } from '../../../constants/urls.constants.js';
 import { validUsername, validPassword, invalidUsername, invalidPassword } from '../../../constants/credentials.constants.js';
 
@@ -20,22 +20,26 @@ test.describe('login/logout functionality', () => {
 
         await loginPage.login(validUsername, validPassword);
 
-        expect(inventoryPage.checkInventoryContentIsEnabled).toBeTruthy();
+        expect(inventoryPage.getInventoryContent.checkIsEnabled()).toBeTruthy();
     });
 
     test('should logout', async ({ page }) => {
-        const sideBarComponent = new SideBarComponent(page);
+        const mainPage = new MainPage(page);
 
         await loginPage.login(validUsername, validPassword);
-        await sideBarComponent.burgerMenuButton.click();
-        await sideBarComponent.logoutButton.click();
 
-        expect(loginPage.checkLoginFormContainerIsVisible()).toBeTruthy();
+        const burgerMenuButton = await mainPage.getHeader.getBurgerMenuButton();
+        await burgerMenuButton.click();
+
+        const logoutButton = await mainPage.getSideBar.getLogoutButton();
+        await logoutButton.click();
+
+        expect(loginPage.getLoginFormContainer.checkIsVisible()).toBeTruthy();
     });
 
     test('should not login with incorrect credentials', async () => {
         await loginPage.login(invalidUsername, invalidPassword);
 
-        expect(loginPage.checkLoginErrorMessageIsVisible()).toBeTruthy();
+        expect(loginPage.getLoginErrorMessage.checkIsVisible()).toBeTruthy();
     });
 });

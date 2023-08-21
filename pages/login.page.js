@@ -31,12 +31,4 @@ export class LoginPage extends BasePage {
         await this.getPasswordInput.fill(password);
         await this.getLoginButton.click();
     }
-
-    async checkLoginFormContainerIsVisible() {
-        await this.getLoginFormContainer.checkIsVisible();
-    }
-
-    async checkLoginErrorMessageIsVisible() {
-        await this.getLoginErrorMessage.checkIsVisible();
-    }
 }
