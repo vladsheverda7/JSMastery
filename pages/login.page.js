@@ -19,7 +19,7 @@ export class LoginPage extends BasePage {
     }
 
     get getLoginFormContainer() {
-        return new BaseElement(this.page.locator('.login_wrapper-inner'));
+        return new BaseElement(this.page.locator('//div[@class="login_wrapper-inner"]'));
     }
 
     get getLoginErrorMessage() {

@@ -9,7 +9,7 @@ export class InventoryPage extends BasePage {
     }
 
     get getInventoryContent() {
-        return new BaseElement(this.page.locator('.inventory_container'));
+        return new BaseElement(this.page.locator('//div[@class="inventory_container"]'));
     }
 
     get getSortButton() {

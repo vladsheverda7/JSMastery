@@ -2,7 +2,7 @@ import { BaseElement } from '../elements/baseElement';
 
 export class HeaderComponent extends BaseElement {
     async getBurgerMenuButton() {
-        return this.find('#react-burger-menu-btn');
+        return this.find('//button[@id="react-burger-menu-btn"]');
     }
 
     async getCheckoutIconLink() {
