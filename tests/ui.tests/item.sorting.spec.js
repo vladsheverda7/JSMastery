@@ -1,15 +1,8 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixture/fixtures.js';
 
-import { LoginPage } from '../../pages/login.page.js';
-import { InventoryPage } from '../../pages/inventory.page.js';
-import { loginUrl } from '../../constants/urls.constants.js';
 import { userCredential } from '../../constants/credentials.constants.js';
 
-test('should sort items by price from low to high', async ({ page }) => {
-    const loginPage = new LoginPage(page, loginUrl);
-    const inventoryPage = new InventoryPage(page);
-
-    await loginPage.navigate();
+test('should sort items by price from low to high', async ({ loginPage, inventoryPage }) => {
     await loginPage.login(userCredential.validUsername, userCredential.validPassword);
     await inventoryPage.getSortButton.selectOption('lohi');
 
