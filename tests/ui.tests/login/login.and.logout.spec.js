@@ -4,7 +4,7 @@ import { LoginPage } from '../../../pages/login.page.js';
 import { MainPage } from '../../../pages/main.page.js';
 import { InventoryPage } from '../../../pages/inventory.page.js';
 import { baseUrl } from '../../../constants/urls.constants.js';
-import { validUsername, validPassword, invalidUsername, invalidPassword } from '../../../constants/credentials.constants.js';
+import { userCredential } from '../../../constants/credentials.constants.js';
 
 test.describe('login/logout functionality', () => {
     let loginPage;
@@ -18,7 +18,7 @@ test.describe('login/logout functionality', () => {
     test('should login with correct credentials', async ({ page }) => {
         const inventoryPage = new InventoryPage(page);
 
-        await loginPage.login(validUsername, validPassword);
+        await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
         expect(inventoryPage.getInventoryContent.checkIsEnabled()).toBeTruthy();
     });
@@ -26,7 +26,7 @@ test.describe('login/logout functionality', () => {
     test('should logout', async ({ page }) => {
         const mainPage = new MainPage(page);
 
-        await loginPage.login(validUsername, validPassword);
+        await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
         const burgerMenuButton = await mainPage.getHeader.getBurgerMenuButton();
         await burgerMenuButton.click();
@@ -38,7 +38,8 @@ test.describe('login/logout functionality', () => {
     });
 
     test('should not login with incorrect credentials', async () => {
-        await loginPage.login(invalidUsername, invalidPassword);
+        // await loginPage.login(invalidUsername, invalidPassword);
+        await loginPage.login(userCredential.invalidUsername, userCredential.invalidPassword);
 
         expect(loginPage.getLoginErrorMessage.checkIsVisible()).toBeTruthy();
     });

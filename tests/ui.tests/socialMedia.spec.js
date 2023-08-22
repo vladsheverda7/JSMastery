@@ -4,7 +4,7 @@ import { LoginPage } from '../../pages/login.page.js';
 import { MainPage } from '../../pages/main.page.js';
 import { baseUrl } from '../../constants/urls.constants.js';
 import { socialMediaArray } from '../../constants/socialMedia.constants.js';
-import { validUsername, validPassword } from '../../constants/credentials.constants.js';
+import { userCredential } from '../../constants/credentials.constants.js';
 
 for (const socialMedia of socialMediaArray) {
     test(`should open ${socialMedia.name} ${socialMedia.url}`, async ({ page, context }) => {
@@ -12,7 +12,7 @@ for (const socialMedia of socialMediaArray) {
         const mainPage = new MainPage(page);
 
         await page.goto(baseUrl);
-        await loginPage.login(validUsername, validPassword);
+        await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
         const socialMediaIcon = await mainPage.getFooter.getSocialMedia(socialMedia.name);
         await socialMediaIcon.click();

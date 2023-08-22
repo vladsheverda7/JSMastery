@@ -6,7 +6,7 @@ import { InventoryPage } from '../../../pages/inventory.page.js';
 import { CartPage } from '../../../pages/cart.page.js';
 import { CheckoutPage } from '../../../pages/checkout.page.js';
 import { baseUrl } from '../../../constants/urls.constants.js';
-import { validUsername, validPassword } from '../../../constants/credentials.constants.js';
+import { userCredential } from '../../../constants/credentials.constants.js';
 
 test('should make purchase', async ({ page }) => {
     const loginPage = new LoginPage(page);
@@ -16,7 +16,7 @@ test('should make purchase', async ({ page }) => {
     const checkoutPage = new CheckoutPage(page);
 
     await page.goto(baseUrl);
-    await loginPage.login(validUsername, validPassword);
+    await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
     const addProductToCartButton = await inventoryPage.getProductContainer(1).getProductAddToCartButton();
     await addProductToCartButton.click();
