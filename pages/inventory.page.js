@@ -1,7 +1,8 @@
 import { BasePage } from './base.page';
-import { BaseElement } from '../elements/baseElement.js';
+import { BaseElement } from '../elements/base.element.js';
 import { ProductComponent } from '../components/product.component.js';
 import { isArraySortedAscending } from '../helpers/array.helpers.js';
+import { BaseElements } from '../elements/base.elements';
 
 export class InventoryPage extends BasePage {
     constructor(page) {
@@ -17,16 +18,15 @@ export class InventoryPage extends BasePage {
     }
 
     getItemListBySpecificAttribute(itemAttribute) {
-        return new BaseElement(this.page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all());
+        return new BaseElements(this.page.locator(`//div[@class="inventory_item_${itemAttribute}"]`));
     }
 
     getProductContainer(productIndex) {
         return new ProductComponent(this.page.locator(`//div[@class="inventory_item"][${productIndex}]`));
     }
 
-    async isItemsSortedBy(attribute) {
-        const items = this.getItemListBySpecificAttribute(attribute);
-        const itemsArray = Object.values(items);
+    async checkItemsIsSortedBy(attribute) {
+        const itemsArray = await this.getItemListBySpecificAttribute(attribute).getElements();
         const isSorted = isArraySortedAscending(itemsArray);
 
         return isSorted;

@@ -1,4 +1,4 @@
-import { BaseElement } from '../elements/baseElement';
+import { BaseElement } from '../elements/base.element';
 
 export class SideBarComponent extends BaseElement {
     async getLogoutButton() {

@@ -1,5 +1,5 @@
 import { BasePage } from './base.page.js';
-import { BaseElement } from '../elements/baseElement.js';
+import { BaseElement } from '../elements/base.element.js';
 
 export class LoginPage extends BasePage {
     #url;

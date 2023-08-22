@@ -13,7 +13,7 @@ test('should sort items by price from low to high', async ({ page }) => {
     await loginPage.login(userCredential.validUsername, userCredential.validPassword);
     await inventoryPage.getSortButton.selectOption('lohi');
 
-    const isArraySorter = inventoryPage.isItemsSortedBy('price');
+    const isArraySorter = inventoryPage.checkItemsIsSortedBy('price');
 
     expect(isArraySorter).toBeTruthy();
 });
