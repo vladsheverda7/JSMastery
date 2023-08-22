@@ -1,1 +1,1 @@
-export const baseUrl = 'https://www.saucedemo.com/';
+export const loginUrl = 'https://www.saucedemo.com/';

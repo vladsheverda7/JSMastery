@@ -2,8 +2,10 @@ import { BasePage } from './base.page.js';
 import { BaseElement } from '../elements/baseElement.js';
 
 export class LoginPage extends BasePage {
-    constructor(page) {
+    #url;
+    constructor(page, url) {
         super(page);
+        this.#url = url;
     }
 
     get getLoginInput() {
@@ -30,5 +32,9 @@ export class LoginPage extends BasePage {
         await this.getLoginInput.fill(userName);
         await this.getPasswordInput.fill(password);
         await this.getLoginButton.click();
+    }
+
+    async navigate() {
+        await this.page.goto(this.#url);
     }
 }
