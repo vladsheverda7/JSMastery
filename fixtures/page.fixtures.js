@@ -5,7 +5,7 @@ import { InventoryPage } from '../pages/inventory.page';
 import { MainPage } from '../pages/main.page';
 import { CartPage } from '../pages/cart.page';
 import { CheckoutPage } from '../pages/checkout.page';
-import { loginUrl } from '../constants/urls.constants.js';
+import { loginUrl } from '../constants/urls.js';
 
 export const test = base.extend({
     loginPage: async ({ page }, use) => {

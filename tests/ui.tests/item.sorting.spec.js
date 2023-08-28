@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixture/fixtures.js';
+import { test, expect } from '../../fixtures/page.fixtures.js';
 
-import { userCredential } from '../../constants/credentials.constants.js';
+import { userCredential } from '../../constants/credentials.js';
 
 test('should sort items by price from low to high', async ({ loginPage, inventoryPage }) => {
     await loginPage.login(userCredential.validUsername, userCredential.validPassword);

@@ -1,6 +1,6 @@
-import { test, expect } from '../../../fixture/fixtures.js';
+import { test, expect } from '../../../fixtures/page.fixtures.js';
 
-import { userCredential } from '../../../constants/credentials.constants.js';
+import { userCredential } from '../../../constants/credentials.js';
 
 test.describe('login/logout functionality', () => {
     test('should login with correct credentials', async ({ loginPage, inventoryPage }) => {
