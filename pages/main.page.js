@@ -1,7 +1,5 @@
-import { BasePage } from './base.page';
-import { FooterComponent } from '../elements/footer.js';
-import { SideBarComponent } from '../elements/sidebar.js';
-import { HeaderComponent } from '../elements/header.js';
+import { BasePage } from '../pages/index';
+import { FooterComponent, SideBarComponent, HeaderComponent } from '../elements/index';
 
 export class MainPage extends BasePage {
     constructor(page) {

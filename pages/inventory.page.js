@@ -1,8 +1,6 @@
-import { BasePage } from './base.page';
-import { BaseElement } from '../elements/base.element.js';
-import { ProductComponent } from '../elements/product.js';
+import { BaseElement, ProductComponent, BaseElements } from '../elements/index';
+import { BasePage } from '../pages/index';
 import { isArraySortedAscending } from '../helpers/array.helpers.js';
-import { BaseElements } from '../elements/elements.collection';
 
 export class InventoryPage extends BasePage {
     constructor(page) {

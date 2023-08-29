@@ -1,6 +1,6 @@
 import { test, expect } from '../../../fixtures/page.fixtures.js';
 
-import { userCredential } from '../../../constants/credentials.js';
+import { userCredential } from '../../../constants/index.js';
 
 test('should make purchase', async ({ loginPage, mainPage, inventoryPage, cartPage, checkoutPage }) => {
     await loginPage.login(userCredential.validUsername, userCredential.validPassword);

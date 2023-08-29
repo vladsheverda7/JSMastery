@@ -1,11 +1,7 @@
 import { test as base } from '@playwright/test';
 
-import { LoginPage } from '../pages/login.page';
-import { InventoryPage } from '../pages/inventory.page';
-import { MainPage } from '../pages/main.page';
-import { CartPage } from '../pages/cart.page';
-import { CheckoutPage } from '../pages/checkout.page';
-import { loginUrl } from '../constants/urls.js';
+import { LoginPage, InventoryPage, MainPage, CartPage, CheckoutPage } from '../pages/index';
+import { loginUrl } from '../constants/index';
 
 export const test = base.extend({
     loginPage: async ({ page }, use) => {

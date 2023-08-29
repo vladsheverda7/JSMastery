@@ -1,7 +1,6 @@
 import { test, expect } from '../../fixtures/page.fixtures.js';
 
-import { socialMediaArray } from '../../constants/socialMedia.js';
-import { userCredential } from '../../constants/credentials.js';
+import { socialMediaArray, userCredential } from '../../constants/index.js';
 
 for (const socialMedia of socialMediaArray) {
     test(`should open ${socialMedia.name} ${socialMedia.url}`, async ({ loginPage, mainPage, context }) => {

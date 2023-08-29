@@ -1,5 +1,5 @@
-import { BaseElement } from '../elements/base.element';
-import { BasePage } from './base.page';
+import { BaseElement } from '../elements/index';
+import { BasePage } from '../pages/index';
 
 export class CheckoutPage extends BasePage {
     constructor(page) {

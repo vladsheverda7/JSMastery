@@ -1,4 +1,4 @@
-import { BaseElement } from './base.element';
+import { BaseElement } from './index';
 
 export class HeaderComponent extends BaseElement {
     async getBurgerMenuButton() {
