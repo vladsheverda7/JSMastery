@@ -1,21 +1,32 @@
-export class InventoryPage {
-    #page;
-    #inventoryContent;
-    sortButton;
-    #inventoryItemBlock;
+import { BaseElement, ProductComponent, BaseElements } from '../elements/index';
+import { BasePage } from '../pages/index';
+import { isArraySortedAscending } from '../helpers/array.helpers.js';
 
+export class InventoryPage extends BasePage {
     constructor(page) {
-        this.#page = page;
-        this.#inventoryContent = this.#page.locator('.inventory_container');
-        this.sortButton = this.#page.locator('//select[@data-test="product_sort_container"]');
-        this.#inventoryItemBlock = itemAttribute => this.#page.locator(`//div[@class="inventory_item_${itemAttribute}"]`).all();
+        super(page);
     }
 
-    async getItemListBySpecificAttribute(itemAttribute) {
-        return this.#inventoryItemBlock(itemAttribute);
+    get getInventoryContent() {
+        return new BaseElement(this.page.locator('//div[@class="inventory_container"]'));
     }
 
-    async getInventoryContent() {
-        return this.#inventoryContent;
+    get getSortButton() {
+        return new BaseElement(this.page.locator('//select[@data-test="product_sort_container"]'));
+    }
+
+    getItemListBySpecificAttribute(itemAttribute) {
+        return new BaseElements(this.page.locator(`//div[@class="inventory_item_${itemAttribute}"]`));
+    }
+
+    getProductContainer(productIndex) {
+        return new ProductComponent(this.page.locator(`//div[@class="inventory_item"][${productIndex}]`));
+    }
+
+    async checkItemsIsSortedBy(attribute) {
+        const itemsArray = await this.getItemListBySpecificAttribute(attribute).getElements();
+        const isSorted = isArraySortedAscending(itemsArray);
+
+        return isSorted;
     }
 }

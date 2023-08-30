@@ -5,3 +5,6 @@ node_modules/
 html-report/
 test-results/
 playwright-report/
+
+# workspace
+.vscode/

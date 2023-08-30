@@ -1,20 +1,12 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/page.fixtures.js';
 
-import { LoginPage } from '../../pages/login.page.js';
-import { InventoryPage } from '../../pages/inventory.page.js';
-import { baseUrl } from '../../constants/urls.constants.js';
-import { isArraySortedAscending } from '../../helpers/arrayHelpers.js';
-import { validUsername, validPassword } from '../../constants/credentials.constants.js';
+import { userCredential } from '../../constants/index.js';
 
-test('should sort items by price from low to high', async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
+test('should sort items by price from low to high', async ({ loginPage, inventoryPage }) => {
+    await loginPage.login(userCredential.validUsername, userCredential.validPassword);
+    await inventoryPage.getSortButton.selectOption('lohi');
 
-    await page.goto(baseUrl);
-    await loginPage.login(validUsername, validPassword);
-    await inventoryPage.sortButton.selectOption({ value: 'lohi' });
-
-    const isArraySorter = isArraySortedAscending(await inventoryPage.getItemListBySpecificAttribute('price'));
+    const isArraySorter = inventoryPage.checkItemsIsSortedBy('price');
 
     expect(isArraySorter).toBeTruthy();
 });

@@ -1,24 +1,18 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../fixtures/page.fixtures.js';
 
-import { LoginPage } from '../../pages/login.page.js';
-import { FooterComponent } from '../../components/footer.component.js';
-import { baseUrl } from '../../constants/urls.constants.js';
-import { socialMediaArray } from '../../constants/socialMedia.constants.js';
-import { validUsername, validPassword } from '../../constants/credentials.constants.js';
+import { socialMediaObject, userCredential } from '../../constants/index.js';
 
-for (const socialMedia of socialMediaArray) {
-    test(`should open ${socialMedia.name} ${socialMedia.url}`, async ({ page, context }) => {
-        const loginPage = new LoginPage(page);
-        const footerComponent = new FooterComponent(page);
+for (const [socialMedia, value] of Object.entries(socialMediaObject)) {
+    test(`should open ${socialMedia} with ${value.url} url`, async ({ loginPage, mainPage, context }) => {
+        await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
-        await page.goto(baseUrl);
-        await loginPage.login(validUsername, validPassword);
-        await footerComponent.clickSocialMediaLink(socialMedia.name);
+        const socialMediaIcon = await mainPage.getFooter.getSocialMedia(value.name);
+        await socialMediaIcon.click();
 
         const pagePromise = context.waitForEvent('page');
         const newPage = await pagePromise;
         await newPage.waitForLoadState();
 
-        await expect(newPage).toHaveURL(socialMedia.url);
+        await expect(newPage).toHaveURL(value.url);
     });
 }

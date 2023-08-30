@@ -1,28 +1,19 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../../fixtures/page.fixtures.js';
 
-import { LoginPage } from '../../../pages/login.page.js';
-import { CartIconComponent } from '../../../components/cart.component.js';
-import { CartPage } from '../../../pages/cart.page.js';
-import { CheckoutPage } from '../../../pages/checkout.page.js';
-import { ProductComponent } from '../../../components/product.component.js';
-import { baseUrl } from '../../../constants/urls.constants.js';
-import { validUsername, validPassword } from '../../../constants/credentials.constants.js';
+import { userCredential } from '../../../constants/index.js';
 
-test('should make purchase', async ({ page }) => {
-    const loginPage = new LoginPage(page);
+test('should make purchase', async ({ loginPage, mainPage, inventoryPage, cartPage, checkoutPage }) => {
+    await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
-    const cartIconComponent = new CartIconComponent(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
-    const productComponent = new ProductComponent(page);
+    const addProductToCartButton = await inventoryPage.getProductContainer(1).getProductAddToCartButton();
+    await addProductToCartButton.click();
 
-    await page.goto(baseUrl);
-    await loginPage.login(validUsername, validPassword);
-    await productComponent.addProductToCart(1);
-    await cartIconComponent.cartIconLink.click();
-    await cartPage.checkoutButton.click();
+    const cartIconLink = await mainPage.getHeader.getCheckoutIconLink();
+    await cartIconLink.click();
+
+    await cartPage.getCheckoutButton.click();
     await checkoutPage.executeFirstCheckoutStep('test', 'test', '0000');
-    await checkoutPage.finishButton.click();
+    await checkoutPage.getFinishButton.click();
 
-    await expect(checkoutPage.checkoutCompleteHeader).toBeVisible();
+    expect(checkoutPage.getCheckoutCompleteHeader.checkIsVisible()).toBeTruthy();
 });

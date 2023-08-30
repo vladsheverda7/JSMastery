@@ -1,41 +1,29 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from '../../../fixtures/page.fixtures.js';
 
-import { LoginPage } from '../../../pages/login.page.js';
-import { SideBarComponent } from '../../../components/sidebar.component.js';
-import { InventoryPage } from '../../../pages/inventory.page.js';
-import { baseUrl } from '../../../constants/urls.constants.js';
-import { validUsername, validPassword, invalidUsername, invalidPassword } from '../../../constants/credentials.constants.js';
+import { userCredential } from '../../../constants/index.js';
 
 test.describe('login/logout functionality', () => {
-    let loginPage;
+    test('should login with correct credentials', async ({ loginPage, inventoryPage }) => {
+        await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
-    test.beforeEach(async ({ page }) => {
-        loginPage = new LoginPage(page);
-
-        await page.goto(baseUrl);
+        expect(inventoryPage.getInventoryContent.checkIsEnabled()).toBeTruthy();
     });
 
-    test('should login with correct credentials', async ({ page }) => {
-        const inventoryPage = new InventoryPage(page);
+    test('should logout', async ({ loginPage, mainPage }) => {
+        await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
-        await loginPage.login(validUsername, validPassword);
+        const burgerMenuButton = await mainPage.getHeader.getBurgerMenuButton();
+        await burgerMenuButton.click();
 
-        await expect(await inventoryPage.getInventoryContent()).toBeEnabled();
+        const logoutButton = await mainPage.getSideBar.getLogoutButton();
+        await logoutButton.click();
+
+        expect(loginPage.getLoginFormContainer.checkIsVisible()).toBeTruthy();
     });
 
-    test('should logout', async ({ page }) => {
-        const sideBarComponent = new SideBarComponent(page);
+    test('should not login with incorrect credentials', async ({ loginPage }) => {
+        await loginPage.login(userCredential.invalidUsername, userCredential.invalidPassword);
 
-        await loginPage.login(validUsername, validPassword);
-        await sideBarComponent.burgerMenuButton.click();
-        await sideBarComponent.logoutButton.click();
-
-        // await expect(loginPage.getLoginFormContainer).toBeVisible();
-    });
-
-    test('should not login with incorrect credentials', async () => {
-        await loginPage.login(invalidUsername, invalidPassword);
-
-        // await expect(loginPage.getLoginPageErrorMessage).toBeVisible();
+        expect(loginPage.getLoginErrorMessage.checkIsVisible()).toBeTruthy();
     });
 });
