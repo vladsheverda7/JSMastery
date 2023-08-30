@@ -1,5 +1,5 @@
 import { userCredential } from './credentials';
-import { socialMediaArray } from './socialMedia';
+import { socialMediaObject } from './socialMedia';
 import { loginUrl } from './urls';
 
-export { userCredential, socialMediaArray, loginUrl };
+export { userCredential, socialMediaObject, loginUrl };

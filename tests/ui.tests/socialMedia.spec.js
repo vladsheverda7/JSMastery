@@ -1,18 +1,18 @@
 import { test, expect } from '../../fixtures/page.fixtures.js';
 
-import { socialMediaArray, userCredential } from '../../constants/index.js';
+import { socialMediaObject, userCredential } from '../../constants/index.js';
 
-for (const socialMedia of socialMediaArray) {
-    test(`should open ${socialMedia.name} ${socialMedia.url}`, async ({ loginPage, mainPage, context }) => {
+for (const [socialMedia, value] of Object.entries(socialMediaObject)) {
+    test(`should open ${socialMedia} with ${value.url} url`, async ({ loginPage, mainPage, context }) => {
         await loginPage.login(userCredential.validUsername, userCredential.validPassword);
 
-        const socialMediaIcon = await mainPage.getFooter.getSocialMedia(socialMedia.name);
+        const socialMediaIcon = await mainPage.getFooter.getSocialMedia(value.name);
         await socialMediaIcon.click();
 
         const pagePromise = context.waitForEvent('page');
         const newPage = await pagePromise;
         await newPage.waitForLoadState();
 
-        await expect(newPage).toHaveURL(socialMedia.url);
+        await expect(newPage).toHaveURL(value.url);
     });
 }
