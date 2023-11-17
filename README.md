@@ -60,4 +60,4 @@ UI tests are made based on Page Object pattern
 
 1. Book and BookDetails relationship: one-to-one. One book can have only one BookDetail
 2. Book and Author relationship: one-to-many. One author can have several Books
-3. TODO: make many-to-many: Genres to Books. 1 book can have several genres and vice verse
+3. Genres to Books relationship: 1 book can have several genres and vice verse

@@ -1,11 +1,27 @@
 const mysql = require('mysql2');
-const dataBaseName = require('../constants/dataBaseName');
+const fs = require('fs');
+
+const connectionConfig = require('../constants/connectionConfig');
 
 const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Passw0rd',
-    database: dataBaseName,
+    multipleStatements: true,
+    host: connectionConfig.host,
+    user: connectionConfig.user,
+    password: connectionConfig.password,
+    database: connectionConfig.database,
 });
 
-module.exports = connection;
+function executeQuery(sqlFile, callback) {
+    let sqlCommand = fs.readFileSync(`database/sqlScripts/${sqlFile}`).toString();
+
+    connection.query(sqlCommand, function (err, results) {
+        if (err) {
+            console.log(err);
+        }
+        if (callback) {
+            callback(results);
+        }
+    });
+}
+
+module.exports = { connection, executeQuery };
