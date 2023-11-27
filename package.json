@@ -18,7 +18,7 @@
     "url": "https://github.com/vladsheverda7/JSMastery"
   },
   "scripts": {
-    "test": "jest",
+    "test:jest": "jest --testRegex test.frameworks/.*\\.test\\.js$",
     "test:unit": "jest test.frameworks/trafficLight.test.js",
     "test:login": "npx playwright test tests/ui.tests/login/.*.spec.js --project=chromium",
     "test:purchase": "npx playwright test tests/ui.tests/purchase/.*.spec.js --project=chromium",
