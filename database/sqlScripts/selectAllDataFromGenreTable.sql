@@ -1,1 +1,4 @@
-Select * From genres;
+Select
+    *
+From
+    genres;

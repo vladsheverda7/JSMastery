@@ -1,1 +1,4 @@
-Select * From booksDetails;
+Select
+    *
+From
+    booksDetails;

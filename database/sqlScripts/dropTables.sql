@@ -7,5 +7,3 @@ DROP TABLE genres;
 DROP TABLE books;
 
 DROP TABLE authors;
-
-

@@ -1,1 +1,4 @@
-Select * From books;
+Select
+    *
+From
+    books;

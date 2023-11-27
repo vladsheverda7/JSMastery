@@ -1,1 +1,3 @@
-DELETE FROM booksGenres WHERE book_id = 1;
+DELETE FROM booksGenres
+WHERE
+    book_id = 1;

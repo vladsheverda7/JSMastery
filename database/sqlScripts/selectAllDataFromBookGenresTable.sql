@@ -1,1 +1,4 @@
-Select * From booksGenres;
+Select
+    *
+From
+    booksGenres;

@@ -1,1 +1,4 @@
-Select * From authors;
+Select
+    *
+From
+    authors;
