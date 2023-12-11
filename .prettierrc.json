@@ -5,5 +5,8 @@
     "singleQuote": true,
     "printWidth": 150,
     "bracketSpacing": true,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "plugins": [
+        "prettier-plugin-sql"
+    ]
 }

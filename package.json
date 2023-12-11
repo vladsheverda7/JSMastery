@@ -18,18 +18,27 @@
     "url": "https://github.com/vladsheverda7/JSMastery"
   },
   "scripts": {
-    "test": "jest",
+    "test:jest": "jest --testRegex test.frameworks/.*\\.test\\.js$",
     "test:unit": "jest test.frameworks/trafficLight.test.js",
     "test:login": "npx playwright test tests/ui.tests/login/.*.spec.js --project=chromium",
     "test:purchase": "npx playwright test tests/ui.tests/purchase/.*.spec.js --project=chromium",
     "test:e2e": "npx playwright test --project=chromium",
     "test:ui": "npx playwright test --ui",
     "test:headed": "npx playwright test --project=chromium --headed",
-    "report": "npx playwright show-report"
+    "report": "npx playwright show-report",
+    "test:tablesData": "mocha database/tests/dbData.test.js"
   },
   "devDependencies": {
     "@playwright/test": "^1.37.0",
-    "chai": "^4.3.7",
-    "jest": "^29.6.2"
+    "chai": "^4.3.8",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "fs-js": "^1.0.6",
+    "jest": "^29.6.2",
+    "mocha": "^10.2.0",
+    "mysql2": "^3.6.0",
+    "prettier": "^3.1.0",
+    "prettier-plugin-sql": "^0.16.0",
+    "sequelize": "^6.32.1"
   }
 }
