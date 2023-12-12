@@ -25,7 +25,7 @@ describe('POST API Request Tests', async () => {
                 },
             )
             .then(res => res.data);
-        console.log(res);
+
         expect(res.name).equal(randomName);
         expect(res.job).equal(randomJobTitle);
 

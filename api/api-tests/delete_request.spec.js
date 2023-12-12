@@ -9,7 +9,7 @@ const customAgent = require('../helper/customAgent');
 describe('DELETE API Request Tests', async () => {
     it('should be able delete user with id 2', async () => {
         const res = await axios.delete(properties.get('baseUrl') + '/users/2', { httpsAgent: customAgent });
-        console.log(res.data);
+
         expect(res.status).equal(204);
     });
 });
