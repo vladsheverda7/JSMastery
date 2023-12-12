@@ -61,3 +61,9 @@ UI tests are made based on Page Object pattern
 1. Book and BookDetails relationship: one-to-one. One book can have only one BookDetail
 2. Book and Author relationship: one-to-many. One author can have several Books
 3. Genres to Books relationship: 1 book can have several genres and vice verse
+
+## Api
+
+1. Run "npm run test:api" command to execute all api tests
+2. Get, post, put, patch, delete methods have been done as an example for real tests
+3. Example tests are located in api/api-tests

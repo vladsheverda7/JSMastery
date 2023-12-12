@@ -8,3 +8,6 @@ playwright-report/
 
 # workspace
 .vscode/
+
+# mochawesome report
+mochawesome-report
