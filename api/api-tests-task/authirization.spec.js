@@ -2,6 +2,8 @@ const axios = require('axios');
 const { expect } = require('chai');
 
 const customAgent = require('../helper/customAgent');
+const PropertiesReader = require('properties-reader');
+const properties = PropertiesReader('api/config/env.properties');
 
 describe('Authorization API Request Tests', async () => {
     it('should be able to be authorized', async () => {
@@ -9,7 +11,7 @@ describe('Authorization API Request Tests', async () => {
         const userPassword = 'my-password';
 
         const res = await axios
-            .get(`https://httpbin.org/basic-auth/${userName}/${userPassword}`, {
+            .get(properties.get('baseUrl') + `basic-auth/${userName}/${userPassword}`, {
                 auth: {
                     username: userName,
                     password: userPassword,
@@ -29,7 +31,7 @@ describe('Authorization API Request Tests', async () => {
 
         try {
             const res = await axios
-                .get(`https://httpbin.org/basic-auth/${userName}/${userPassword}`, {
+                .get(properties.get('baseUrl') + `basic-auth/${userName}/${userPassword}`, {
                     auth: {
                         username: userName,
                         password: wrongPassword,
