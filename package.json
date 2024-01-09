@@ -27,7 +27,8 @@
     "test:headed": "npx playwright test --project=chromium --headed",
     "report": "npx playwright show-report",
     "test:tablesData": "mocha database/tests/dbData.test.js",
-    "test:api": "npx mocha api/api-tests-task/**/*.spec.js --reporter mochawesome"
+    "test:api": "npx mocha api/api-tests-task/**/*.spec.js --reporter mochawesome",
+    "test:json": "npx jest api/json-task/tests/company.spec.js"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
