@@ -64,6 +64,5 @@ UI tests are made based on Page Object pattern
 
 ## Api
 
-1. Run "npm run test:api_example" command to execute all api tests
-2. Get, post, put, patch, delete methods have been done as an example for real tests
-3. Example tests are located in api/api-tests
+1. Run "npm run test:api" command to execute all api tests
+2. Run "npm run test:json" command to execute all tests related to json
