@@ -1,4 +1,4 @@
-export class BaseElements {
+class BaseElements {
     #locator;
 
     constructor(locator) {
@@ -22,3 +22,5 @@ export class BaseElements {
         return elements;
     }
 }
+
+module.exports = BaseElements;

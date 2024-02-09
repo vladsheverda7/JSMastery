@@ -1,0 +1,16 @@
+{
+    "default": {
+        "paths": [
+            "tests/ui.tests/bdd.tests/features/**/*.feature"
+        ],
+        "require": [
+            "tests/ui.tests/bdd.tests/step.definitions/**/*.js"
+        ],
+        "format": [
+            [
+                "html",
+                "reports/html-formatter.html"
+            ]
+        ]
+    }
+}

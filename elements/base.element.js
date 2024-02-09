@@ -1,4 +1,4 @@
-export class BaseElement {
+class BaseElement {
     #locator;
 
     constructor(locator) {
@@ -33,3 +33,5 @@ export class BaseElement {
         return this.#getLocator().isEnabled();
     }
 }
+
+module.exports = BaseElement;

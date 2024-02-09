@@ -1,4 +1,4 @@
-export function isArraySortedAscending(array) {
+function isArraySortedAscending(array) {
     return array.every((currentValue, index, arr) => {
         if (index === 0) {
             return true;
@@ -9,3 +9,5 @@ export function isArraySortedAscending(array) {
         return currentValue >= previousValue;
     });
 }
+
+module.exports = { isArraySortedAscending };

@@ -1,7 +1,9 @@
-import { BaseElement } from './index';
+const BaseElement = require('./base.element');
 
-export class ProductComponent extends BaseElement {
+class ProductComponent extends BaseElement {
     async getProductAddToCartButton() {
         return this.find('//button');
     }
 }
+
+module.exports = ProductComponent;

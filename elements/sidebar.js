@@ -1,7 +1,9 @@
-import { BaseElement } from './index';
+const BaseElement = require('./base.element');
 
-export class SideBarComponent extends BaseElement {
+class SideBarComponent extends BaseElement {
     async getLogoutButton() {
         return this.find('//a[@id="logout_sidebar_link"]');
     }
 }
+
+module.exports = SideBarComponent;

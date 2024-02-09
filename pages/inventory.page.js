@@ -1,8 +1,10 @@
-import { BaseElement, ProductComponent, BaseElements } from '../elements/index';
-import { BasePage } from '../pages/index';
-import { isArraySortedAscending } from '../helpers/array.helpers.js';
+const BaseElement = require('../elements/base.element.js');
+const ProductComponent = require('../elements/product.js');
+const BaseElements = require('../elements/elements.collection.js');
+const BasePage = require('../pages/base.page');
+const isArraySortedAscending = require('../helpers/array.helpers.js');
 
-export class InventoryPage extends BasePage {
+class InventoryPage extends BasePage {
     constructor(page) {
         super(page);
     }
@@ -30,3 +32,5 @@ export class InventoryPage extends BasePage {
         return isSorted;
     }
 }
+
+module.exports = InventoryPage;

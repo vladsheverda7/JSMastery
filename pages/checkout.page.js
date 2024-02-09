@@ -1,7 +1,7 @@
-import { BaseElement } from '../elements/index';
-import { BasePage } from '../pages/index';
+const BaseElement = require('../elements/base.element');
+const BasePage = require('../pages/base.page');
 
-export class CheckoutPage extends BasePage {
+class CheckoutPage extends BasePage {
     constructor(page) {
         super(page);
     }
@@ -41,3 +41,5 @@ export class CheckoutPage extends BasePage {
         await this.getContinueButton.click();
     }
 }
+
+module.exports = CheckoutPage;

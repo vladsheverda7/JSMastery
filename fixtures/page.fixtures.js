@@ -1,9 +1,13 @@
-import { test as base } from '@playwright/test';
+const { test: base } = require('@playwright/test');
 
-import { LoginPage, InventoryPage, MainPage, CartPage, CheckoutPage } from '../pages/index';
-import { loginUrl } from '../constants/index';
+const LoginPage = require('../pages/login.page');
+const InventoryPage = require('../pages/inventory.page');
+const MainPage = require('../pages/main.page');
+const CartPage = require('../pages/cart.page');
+const CheckoutPage = require('../pages/checkout.page');
+const { loginUrl } = require('../constants/index');
 
-export const test = base.extend({
+const test = base.extend({
     loginPage: async ({ page }, use) => {
         const loginPage = new LoginPage(page, loginUrl);
         await loginPage.navigate();
@@ -27,4 +31,4 @@ export const test = base.extend({
     },
 });
 
-exports.expect = base.expect;
+module.exports = { test, expect: base.expect };

@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/page.fixtures.js';
+const { test, expect } = require('../../fixtures/page.fixtures.js');
 
-import { socialMediaObject, userCredential } from '../../constants/index.js';
+const { socialMediaObject, userCredential } = require('../../constants/index.js');
 
 for (const [socialMedia, value] of Object.entries(socialMediaObject)) {
     test(`should open ${socialMedia} with ${value.url} url`, async ({ loginPage, mainPage, context }) => {

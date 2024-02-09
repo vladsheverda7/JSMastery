@@ -1,5 +1,5 @@
-import { userCredential } from './credentials';
-import { socialMediaObject } from './socialMedia';
-import { loginUrl } from './urls';
+const { userCredential } = require('./credentials');
+const { socialMediaObject } = require('./socialMedia');
+const { loginUrl } = require('./urls');
 
-export { userCredential, socialMediaObject, loginUrl };
+module.exports = { userCredential, socialMediaObject, loginUrl };
