@@ -25,9 +25,17 @@ When(/^the user logins with valid (.*) and (.*)$/, async (username, password) =>
     await loginPage.login(username, password);
 });
 
+When(/^the user logins with invalid (.*) and (.*)$/, async (username, password) => {
+    await loginPage.login(username, password);
+});
+
 Then('Inventory Page is opened', async () => {
     const inventoryPage = new InventoryPage(page);
     expect(await inventoryPage.getInventoryContent.checkIsEnabled()).toBeTruthy();
+});
+
+Then('Error message appears', async () => {
+    expect(await loginPage.getLoginErrorMessage.checkIsVisible()).toBeTruthy();
 });
 
 AfterAll(async () => {
