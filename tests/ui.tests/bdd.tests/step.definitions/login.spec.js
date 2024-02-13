@@ -1,16 +1,18 @@
 const { BeforeAll, AfterAll, Given, When, Then } = require('@cucumber/cucumber');
-const { expect, chromium } = require('@playwright/test');
+const { expect } = require('@playwright/test');
 
 const LoginPage = require('../../../../pages/login.page');
 const InventoryPage = require('../../../../pages/inventory.page');
 const { loginUrl } = require('../../../../constants/index');
+const { launchBrowser } = require('../../../../helpers/launch.browser');
 
 let loginPage;
-let browser;
-let page;
+
+const browserType = process.env.BROWSER;
+const headless = process.env.HEADLESS === 'true';
 
 BeforeAll(async () => {
-    browser = await chromium.launch({ headless: false });
+    browser = await launchBrowser(browserType, headless);
     page = await browser.newPage();
 });
 
