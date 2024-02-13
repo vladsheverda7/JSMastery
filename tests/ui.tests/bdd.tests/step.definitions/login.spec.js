@@ -19,14 +19,13 @@ Given('the user is on Login Page', async () => {
     await loginPage.navigate();
 });
 
-When('the user logins with valid {string} and {string}', async (username, password) => {
+When(/^the user logins with valid (.*) and (.*)$/, async (username, password) => {
     await loginPage.login(username, password);
-    await page.waitForTimeout(1000);
 });
 
 Then('Inventory Page is opened', async () => {
     const inventoryPage = new InventoryPage(page);
-    expect(inventoryPage.getInventoryContent.checkIsEnabled()).toBeTruthy();
+    expect(await inventoryPage.getInventoryContent.checkIsEnabled()).toBeTruthy();
 });
 
 AfterAll(async () => {
