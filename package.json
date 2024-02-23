@@ -27,7 +27,7 @@
     "test:headed": "npx playwright test --project=chromium --headed",
     "report": "npx playwright show-report",
     "test:tablesData": "mocha database/tests/dbData.test.js",
-    "test:chromebdd": "cross-env BROWSER=chrome HEADLESS=true npx cucumber-js",
+    "test:chromebdd": "cross-env BROWSER=chrome HEADLESS=false npx cucumber-js",
     "test:firefoxbdd": "cross-env BROWSER=firefox HEADLESS=true npx cucumber-js"
   },
   "devDependencies": {

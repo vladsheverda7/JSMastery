@@ -1,19 +1,21 @@
-const { BeforeAll, AfterAll, Given, When, Then } = require('@cucumber/cucumber');
+const { BeforeAll, AfterAll, Before, After, Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
 
 const LoginPage = require('../../../../pages/login.page');
 const InventoryPage = require('../../../../pages/inventory.page');
 const { loginUrl } = require('../../../../constants/index');
-const { launchBrowser } = require('../../../../helpers/launch.browser');
+const { launchBrowser, closeBrowser, getPage } = require('./hooks');
 
 let loginPage;
-
-const browserType = process.env.BROWSER;
-const headless = process.env.HEADLESS === 'true';
+let page;
 
 BeforeAll(async () => {
-    browser = await launchBrowser(browserType, headless);
-    page = await browser.newPage();
+    await launchBrowser();
+    page = getPage();
+});
+
+Before(async () => {
+    page = getPage();
 });
 
 Given('the user is on Login Page', async () => {
@@ -39,5 +41,5 @@ Then('Error message appears', async () => {
 });
 
 AfterAll(async () => {
-    await browser.close();
+    await closeBrowser();
 });
