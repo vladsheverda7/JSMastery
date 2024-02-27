@@ -1,7 +1,7 @@
-import { BaseElement } from '../elements/index';
-import { BasePage } from '../pages/index';
+const BaseElement = require('../elements/base.element');
+const BasePage = require('../pages/base.page');
 
-export class LoginPage extends BasePage {
+class LoginPage extends BasePage {
     #url;
     constructor(page, url) {
         super(page);
@@ -38,3 +38,5 @@ export class LoginPage extends BasePage {
         await this.page.goto(this.#url);
     }
 }
+
+module.exports = LoginPage;

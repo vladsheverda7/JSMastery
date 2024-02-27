@@ -1,6 +1,6 @@
-import { BaseElement } from './index';
+const BaseElement = require('./base.element');
 
-export class HeaderComponent extends BaseElement {
+class HeaderComponent extends BaseElement {
     async getBurgerMenuButton() {
         return this.find('//button[@id="react-burger-menu-btn"]');
     }
@@ -9,3 +9,5 @@ export class HeaderComponent extends BaseElement {
         return this.find('//a[@class="shopping_cart_link"]');
     }
 }
+
+module.exports = HeaderComponent;

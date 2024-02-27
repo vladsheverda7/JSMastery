@@ -1,6 +1,6 @@
-import { test, expect } from '../../fixtures/page.fixtures.js';
+const { test, expect } = require('../../fixtures/page.fixtures.js');
 
-import { userCredential } from '../../constants/index.js';
+const { userCredential } = require('../../constants/index.js');
 
 test('should sort items by price from low to high', async ({ loginPage, inventoryPage }) => {
     await loginPage.login(userCredential.validUsername, userCredential.validPassword);

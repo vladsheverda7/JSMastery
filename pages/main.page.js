@@ -1,7 +1,9 @@
-import { BasePage } from '../pages/index';
-import { FooterComponent, SideBarComponent, HeaderComponent } from '../elements/index';
+const BasePage = require('../pages/base.page');
+const FooterComponent = require('../elements/footer');
+const HeaderComponent = require('../elements/header');
+const SideBarComponent = require('../elements/sidebar');
 
-export class MainPage extends BasePage {
+class MainPage extends BasePage {
     constructor(page) {
         super(page);
     }
@@ -18,3 +20,5 @@ export class MainPage extends BasePage {
         return new SideBarComponent(this.page.locator('//div[@class="bm-menu-wrap"]'));
     }
 }
+
+module.exports = MainPage;

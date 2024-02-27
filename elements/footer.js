@@ -1,7 +1,9 @@
-import { BaseElement } from './index';
+const BaseElement = require('./base.element');
 
-export class FooterComponent extends BaseElement {
+class FooterComponent extends BaseElement {
     async getSocialMedia(socialMediaName) {
         return this.find(`//li[@class="social_${socialMediaName}"]`);
     }
 }
+
+module.exports = FooterComponent;

@@ -1,4 +1,4 @@
-export const socialMediaObject = {
+const socialMediaObject = {
     twitter: {
         url: 'https://twitter.com/saucelabs',
         name: 'twitter',
@@ -12,3 +12,5 @@ export const socialMediaObject = {
         name: 'linkedin',
     },
 };
+
+module.exports = { socialMediaObject };

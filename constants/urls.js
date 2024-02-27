@@ -1,1 +1,3 @@
-export const loginUrl = 'https://www.saucedemo.com/';
+const loginUrl = 'https://www.saucedemo.com/';
+
+module.exports = { loginUrl };

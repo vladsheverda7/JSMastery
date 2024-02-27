@@ -1,10 +1,12 @@
 # Node.js Tools for Visual Studio
 node_modules/
 
-# Playwright reports and results
+# Reports and results
 html-report/
 test-results/
 playwright-report/
+mochawesome-report/
+reports/
 
 # workspace
 .vscode/

@@ -1,7 +1,7 @@
-import { BaseElement } from '../elements/index';
-import { BasePage } from '../pages/index';
+const BaseElement = require('../elements/base.element');
+const BasePage = require('../pages/base.page');
 
-export class CartPage extends BasePage {
+class CartPage extends BasePage {
     constructor(page) {
         super(page);
     }
@@ -10,3 +10,5 @@ export class CartPage extends BasePage {
         return new BaseElement(this.page.locator('//button[@id="checkout"]'));
     }
 }
+
+module.exports = CartPage;
